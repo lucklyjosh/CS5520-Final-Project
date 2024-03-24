@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A312BAFB95A00364FCC /* LoginScreen.swift */; };
+		29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A342BAFDF0100364FCC /* SignUpScreen.swift */; };
+		29474A382BAFDF2600364FCC /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A372BAFDF2600364FCC /* ProfileScreen.swift */; };
+		29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */; };
+		29474A3E2BAFDF7200364FCC /* RecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A3D2BAFDF7200364FCC /* RecipeScreen.swift */; };
+		29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */; };
+		29474A442BAFDFF800364FCC /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A432BAFDFF800364FCC /* MainScreen.swift */; };
 		298F69972BAFAFAE00CE9FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */; };
 		298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */; };
 		298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F699A2BAFAFAE00CE9FDD /* ViewController.swift */; };
@@ -38,6 +44,12 @@
 
 /* Begin PBXFileReference section */
 		29474A312BAFB95A00364FCC /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		29474A342BAFDF0100364FCC /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		29474A372BAFDF2600364FCC /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeScreen.swift; sourceTree = "<group>"; };
+		29474A3D2BAFDF7200364FCC /* RecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreen.swift; sourceTree = "<group>"; };
+		29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRecipeScreen.swift; sourceTree = "<group>"; };
+		29474A432BAFDFF800364FCC /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		298F69932BAFAFAE00CE9FDD /* CS5520 Final Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS5520 Final Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,12 +91,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		29474A2F2BAFB94300364FCC /* Login */ = {
+		29474A2F2BAFB94300364FCC /* Login Screen */ = {
 			isa = PBXGroup;
 			children = (
 				29474A312BAFB95A00364FCC /* LoginScreen.swift */,
 			);
-			path = Login;
+			path = "Login Screen";
+			sourceTree = "<group>";
+		};
+		29474A332BAFDEC800364FCC /* Signup Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A342BAFDF0100364FCC /* SignUpScreen.swift */,
+			);
+			path = "Signup Screen";
+			sourceTree = "<group>";
+		};
+		29474A362BAFDF0C00364FCC /* Profile Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A372BAFDF2600364FCC /* ProfileScreen.swift */,
+			);
+			path = "Profile Screen";
+			sourceTree = "<group>";
+		};
+		29474A392BAFDF2A00364FCC /* Add Recipe Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */,
+			);
+			path = "Add Recipe Screen";
+			sourceTree = "<group>";
+		};
+		29474A3C2BAFDF5900364FCC /* Recipe Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A3D2BAFDF7200364FCC /* RecipeScreen.swift */,
+			);
+			path = "Recipe Screen";
+			sourceTree = "<group>";
+		};
+		29474A3F2BAFDFA100364FCC /* Generate Recipe Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */,
+			);
+			path = "Generate Recipe Screen";
+			sourceTree = "<group>";
+		};
+		29474A422BAFDFE800364FCC /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29474A432BAFDFF800364FCC /* MainScreen.swift */,
+			);
+			path = "Main Screen";
 			sourceTree = "<group>";
 		};
 		298F698A2BAFAFAE00CE9FDD = {
@@ -111,7 +171,13 @@
 		298F69952BAFAFAE00CE9FDD /* CS5520 Final Project */ = {
 			isa = PBXGroup;
 			children = (
-				29474A2F2BAFB94300364FCC /* Login */,
+				29474A422BAFDFE800364FCC /* Main Screen */,
+				29474A3F2BAFDFA100364FCC /* Generate Recipe Screen */,
+				29474A3C2BAFDF5900364FCC /* Recipe Screen */,
+				29474A392BAFDF2A00364FCC /* Add Recipe Screen */,
+				29474A362BAFDF0C00364FCC /* Profile Screen */,
+				29474A332BAFDEC800364FCC /* Signup Screen */,
+				29474A2F2BAFB94300364FCC /* Login Screen */,
 				298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */,
 				298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */,
 				298F699A2BAFAFAE00CE9FDD /* ViewController.swift */,
@@ -271,8 +337,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */,
+				29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */,
+				29474A442BAFDFF800364FCC /* MainScreen.swift in Sources */,
+				29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */,
+				29474A382BAFDF2600364FCC /* ProfileScreen.swift in Sources */,
 				298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */,
 				298F69972BAFAFAE00CE9FDD /* AppDelegate.swift in Sources */,
+				29474A3E2BAFDF7200364FCC /* RecipeScreen.swift in Sources */,
 				298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */,
 				29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */,
 			);
