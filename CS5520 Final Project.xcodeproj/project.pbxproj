@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A312BAFB95A00364FCC /* LoginScreen.swift */; };
 		298F69972BAFAFAE00CE9FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */; };
 		298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */; };
 		298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F699A2BAFAFAE00CE9FDD /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29474A312BAFB95A00364FCC /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		298F69932BAFAFAE00CE9FDD /* CS5520 Final Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS5520 Final Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29474A2F2BAFB94300364FCC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				29474A312BAFB95A00364FCC /* LoginScreen.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		298F698A2BAFAFAE00CE9FDD = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +111,7 @@
 		298F69952BAFAFAE00CE9FDD /* CS5520 Final Project */ = {
 			isa = PBXGroup;
 			children = (
-				298F69CD2BAFB14300CE9FDD /* Generate Recipe */,
-				298F69CC2BAFB0F700CE9FDD /* User Profile Screen */,
-				298F69CB2BAFB0D400CE9FDD /* Recipe Screen */,
-				298F69CA2BAFB0B300CE9FDD /* Add Recipe Screen */,
-				298F69C92BAFB0A800CE9FDD /* Main Screen */,
-				298F69C82BAFB09F00CE9FDD /* Signup Screen */,
-				298F69C72BAFB09400CE9FDD /* Login Screen */,
+				29474A2F2BAFB94300364FCC /* Login */,
 				298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */,
 				298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */,
 				298F699A2BAFAFAE00CE9FDD /* ViewController.swift */,
@@ -134,55 +138,6 @@
 				298F69B92BAFAFB100CE9FDD /* CS5520_Final_ProjectUITestsLaunchTests.swift */,
 			);
 			path = "CS5520 Final ProjectUITests";
-			sourceTree = "<group>";
-		};
-		298F69C72BAFB09400CE9FDD /* Login Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Login Screen";
-			sourceTree = "<group>";
-		};
-		298F69C82BAFB09F00CE9FDD /* Signup Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Signup Screen";
-			sourceTree = "<group>";
-		};
-		298F69C92BAFB0A800CE9FDD /* Main Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Main Screen";
-			sourceTree = "<group>";
-		};
-		298F69CA2BAFB0B300CE9FDD /* Add Recipe Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Add Recipe Screen";
-			sourceTree = "<group>";
-		};
-		298F69CB2BAFB0D400CE9FDD /* Recipe Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Recipe Screen";
-			sourceTree = "<group>";
-		};
-		298F69CC2BAFB0F700CE9FDD /* User Profile Screen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "User Profile Screen";
-			sourceTree = "<group>";
-		};
-		298F69CD2BAFB14300CE9FDD /* Generate Recipe */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Generate Recipe";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +274,7 @@
 				298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */,
 				298F69972BAFAFAE00CE9FDD /* AppDelegate.swift in Sources */,
 				298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */,
+				29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
