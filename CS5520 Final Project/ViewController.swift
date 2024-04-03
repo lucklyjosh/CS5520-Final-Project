@@ -9,9 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    override func loadView() {
+//        view = SignUpScreen()
+//        view = LoginScreen()
+        view = MainScreen()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.title = "Foodie's Heaven"
     }
 
 
