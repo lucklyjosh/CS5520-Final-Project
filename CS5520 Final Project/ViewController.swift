@@ -12,7 +12,9 @@ class ViewController: UIViewController {
     override func loadView() {
 //        view = SignUpScreen()
 //        view = LoginScreen()
-        view = MainScreen()
+//        view = MainScreen()
+          view = ProfileView()
+        
     }
     
     override func viewDidLoad() {
