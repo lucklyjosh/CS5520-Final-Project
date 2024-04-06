@@ -9,6 +9,8 @@ import UIKit
 
 class MainScreen: UIView {
     
+    var buttonPF: UIButton!
+    
     private let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
 
     private lazy var collectionView: UICollectionView = {
@@ -49,8 +51,8 @@ class MainScreen: UIView {
     private lazy var menuButton: UIButton = createBarButton(imageSystemName: "line.horizontal.3")
     private lazy var searchButton: UIButton = createBarButton(imageSystemName: "magnifyingglass")
     private lazy var homeButton: UIButton = createBarButton(imageSystemName: "house")
-    private lazy var profileButton: UIButton = createBarButton(imageSystemName: "person.crop.circle")
-    private lazy var plusButton: UIButton = createPlusButton()
+    public lazy var profileButton: UIButton = createBarButton(imageSystemName: "person.crop.circle")
+    public lazy var plusButton: UIButton = createPlusButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
