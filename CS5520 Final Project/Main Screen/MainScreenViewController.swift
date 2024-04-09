@@ -9,10 +9,10 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
-//    let mainScreen = MainScreen()
+    let mainScreen = MainScreen()
     
     override func loadView() {
-//        view = mainScreen
+        view = mainScreen
     }
     
     override func viewDidLoad() {

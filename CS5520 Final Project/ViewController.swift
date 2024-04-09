@@ -11,9 +11,9 @@ class ViewController: UIViewController {
 
     override func loadView() {
 //        view = SignUpScreen()
-//        view = LoginScreen()
+        view = LoginScreen()
 //        view = MainScreen()
-          view = ProfileView()
+//          view = ProfileView()
 //            view = RecipeScreen()
 //            view = AddRecipeScreen()
         

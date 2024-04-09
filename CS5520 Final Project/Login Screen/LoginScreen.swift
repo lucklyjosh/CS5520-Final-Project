@@ -4,10 +4,13 @@
 //
 //  Created by Josh wen on 3/23/24.
 //
-
 import UIKit
+import GoogleSignIn
+import GoogleSignInSwift
 
 class LoginScreen: UIView {
+    
+    var onGoogleSignInButtonTapped: (() -> Void)?
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -25,6 +28,29 @@ class LoginScreen: UIView {
         label.textAlignment = .center
         label.textColor = .gray
         return label
+    }()
+    
+    let googleSignInButton: UIButton = {
+        let button = UIButton(type: .system)
+
+        // Create a new UIButton.Configuration
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = UIColor(red: 66/255, green: 133/255, blue: 244/255, alpha: 1)  // Google's brand color
+        config.baseForegroundColor = .white
+        config.cornerStyle = .medium
+        config.title = "Sign in with Google"
+        config.titlePadding = 10
+        config.imagePadding = 10
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30) // Adjust content insets
+
+        button.configuration = config
+
+        // Add the Google logo image
+        if let logoImage = UIImage(named: "Google") {
+            button.setImage(logoImage, for: .normal)
+        }
+
+        return button
     }()
     
     let emailTextField: UITextField = createTextField(withPlaceholder: "example@gmail.com", iconName: "envelope")
@@ -71,11 +97,30 @@ class LoginScreen: UIView {
         backgroundColor = .white
         addSubviews()
         setupAutoLayout()
+        setupButtonTargets()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        commonInit()
     }
+    
+    func commonInit() {
+        backgroundColor = .white
+        addSubviews()
+        setupAutoLayout()
+        setupButtonTargets()
+    }
+    
+    func setupButtonTargets() {
+        googleSignInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func googleSignInButtonTapped() {
+        print("Google Sign-In button tapped")
+        onGoogleSignInButtonTapped?()
+    }
+
     
     func addSubviews() {
         addSubview(titleLabel)
@@ -84,28 +129,27 @@ class LoginScreen: UIView {
         addSubview(passwordTextField)
         addSubview(loginButton)
         addSubview(signUpButton)
+        addSubview(googleSignInButton)
     }
     
     func setupAutoLayout() {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, emailTextField, passwordTextField, loginButton, signUpButton])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, emailTextField, passwordTextField, googleSignInButton, loginButton, signUpButton])
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        
+
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
-        
-        [emailTextField, passwordTextField].forEach { textField in
-            textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
-        
-        loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        signUpButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
-}
 
+        [emailTextField, passwordTextField, googleSignInButton, loginButton].forEach { view in
+            view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+    }
+    
+    
+}
