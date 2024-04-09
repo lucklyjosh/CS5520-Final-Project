@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 //        view = SignUpScreen()
 //        view = LoginScreen()
 //        view = MainScreen()
-//          view = ProfileView()
+          view = ProfileView()
 //            view = RecipeScreen()
 //            view = AddRecipeScreen()
         
