@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBfO1601x5slEoWtqVtLSAwbVaoLvMglWk</string>
+	<string>AIzaSyArm7VWR7Xt567cLSgdTxngsY0Ng9b15oc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>949503393353</string>
+	<string>762600390470</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.nuios.CS5520-Final-Project</string>
 	<key>PROJECT_ID</key>
-	<string>final-8be5f</string>
+	<string>final-4d26f</string>
 	<key>STORAGE_BUCKET</key>
-	<string>final-8be5f.appspot.com</string>
+	<string>final-4d26f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:949503393353:ios:452bc638b6c04b2030c998</string>
+	<string>1:762600390470:ios:941741044e1a421e816f47</string>
 </dict>
 </plist>
