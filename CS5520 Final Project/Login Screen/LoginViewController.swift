@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
                     print("Firebase Sign-In error: \(error.localizedDescription)")
                     return
                 }
-                // User is signed in to Firebase, navigate to the main screen
+                // Navigate to the main screen
                 self.navigateToMainScreen()
             }
         }
@@ -72,5 +72,9 @@ class LoginViewController: UIViewController {
         let mainScreenVC = MainScreenViewController()
         mainScreenVC.modalPresentationStyle = .fullScreen
         present(mainScreenVC, animated: true)
+        
+        
+//        let mainScreenVC = MainScreenViewController()
+//        navigationController?.pushViewController(mainScreenVC, animated: true)
     }
 }

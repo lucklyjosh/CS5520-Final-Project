@@ -99,7 +99,7 @@ class MainScreen: UIView {
         ])
     }
     
-    private func addBorderLineToTopOfBottomBar() {
+    func addBorderLineToTopOfBottomBar() {
         let borderLine = UIView()
         borderLine.backgroundColor = .lightGray
         borderLine.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +113,7 @@ class MainScreen: UIView {
         ])
     }
 
-    private func addBorderLineToView(_ view: UIView, atTop: Bool) {
+    func addBorderLineToView(_ view: UIView, atTop: Bool) {
         let borderLine = UIView()
         borderLine.backgroundColor = .lightGray
         borderLine.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +126,7 @@ class MainScreen: UIView {
             atTop ? borderLine.topAnchor.constraint(equalTo: view.topAnchor) : borderLine.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    private func setupViews() {
+    func setupViews() {
         addSubview(topBar)
         addSubview(bottomBar)
         addSubview(collectionView)
@@ -142,7 +142,7 @@ class MainScreen: UIView {
         addBorderLineToView(bottomBar, atTop: true)
     }
     
-    private func setupLayout() {
+    func setupLayout() {
         NSLayoutConstraint.activate([
             topBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             topBar.leadingAnchor.constraint(equalTo: leadingAnchor),
