@@ -118,6 +118,7 @@ class ProfileView: UIView {
         profilePicture.contentHorizontalAlignment = .fill
         profilePicture.contentVerticalAlignment = .fill
         profilePicture.imageView?.contentMode = .scaleAspectFit
+        profilePicture.showsMenuAsPrimaryAction = true
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(profilePicture)
     }
