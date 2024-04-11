@@ -11,9 +11,9 @@ class MainScreen: UIView {
     
     var buttonPF: UIButton!
     
-    private let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
+    let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
 
-    private lazy var collectionView: UICollectionView = {
+    var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
         let padding: CGFloat = 15
@@ -34,22 +34,21 @@ class MainScreen: UIView {
         return collectionView
     }()
 
-    private lazy var topBar: UIView = {
+    var topBar: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var bottomBar: UIView = {
+    var bottomBar: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var menuButton: UIButton = createBarButton(imageSystemName: "line.horizontal.3")
-    private lazy var searchButton: UIButton = createBarButton(imageSystemName: "magnifyingglass")
+
     private lazy var homeButton: UIButton = createBarButton(imageSystemName: "house")
     public lazy var profileButton: UIButton = createBarButton(imageSystemName: "person.crop.circle")
     public lazy var plusButton: UIButton = createPlusButton()
@@ -75,7 +74,7 @@ class MainScreen: UIView {
         return button
     }
     
-    private func createPlusButton() -> UIButton {
+    func createPlusButton() -> UIButton {
         let button = UIButton(type: .custom)
         button.backgroundColor = .red
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -85,7 +84,7 @@ class MainScreen: UIView {
         return button
     }
     
-    private func addBorderLine(to view: UIView) {
+    func addBorderLine(to view: UIView) {
         let borderLine = UIView()
         borderLine.backgroundColor = .lightGray
         borderLine.translatesAutoresizingMaskIntoConstraints = false
@@ -130,9 +129,6 @@ class MainScreen: UIView {
         addSubview(topBar)
         addSubview(bottomBar)
         addSubview(collectionView)
-
-        topBar.addSubview(menuButton)
-        topBar.addSubview(searchButton)
         
         bottomBar.addSubview(homeButton)
         bottomBar.addSubview(profileButton)
@@ -148,17 +144,7 @@ class MainScreen: UIView {
             topBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             topBar.trailingAnchor.constraint(equalTo: trailingAnchor),
             topBar.heightAnchor.constraint(equalToConstant: 10),
-            
-            menuButton.leadingAnchor.constraint(equalTo: topBar.leadingAnchor, constant: 16),
-            menuButton.bottomAnchor.constraint(equalTo: topBar.bottomAnchor, constant: -8),
-            menuButton.widthAnchor.constraint(equalToConstant: 24),
-            menuButton.heightAnchor.constraint(equalToConstant: 24),
-            
-            searchButton.trailingAnchor.constraint(equalTo: topBar.trailingAnchor, constant: -16),
-            searchButton.bottomAnchor.constraint(equalTo: topBar.bottomAnchor, constant: -8),
-            searchButton.widthAnchor.constraint(equalToConstant: 24),
-            searchButton.heightAnchor.constraint(equalToConstant: 24),
-            
+              
             collectionView.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
