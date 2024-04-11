@@ -6,12 +6,16 @@
 //
 import UIKit
 import Firebase
-import GoogleSignIn
+import FirebaseAuth
+
 class LoginViewController: UIViewController {
     
+    var loginView: LoginScreen!
+    
     override func loadView() {
-        // Set the view to an instance of LoginScreen
-        view = LoginScreen()
+//        view = LoginScreen()
+        loginView = LoginScreen()
+        view = loginView
     }
     
     override func viewDidLoad() {
@@ -23,58 +27,50 @@ class LoginViewController: UIViewController {
                 self?.handleGoogleSignIn()
             }
         }
+        loginView.signUpButton.addTarget(self, action: #selector(navigateToSignUp), for: .touchUpInside)
+        loginView.loginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+  
     }
 
-
-
-    func setupGoogleSignInButton() {
-        let googleSignInButton = GIDSignInButton()
-        googleSignInButton.style = .wide
-        googleSignInButton.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
-        if let loginScreen = view as? LoginScreen {
-            loginScreen.addSubview(googleSignInButton)
-            // Configure auto-layout or frame for googleSignInButton as needed
+    @objc func navigateToSignUp() {
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name("ShowSignUpScreen"), object: nil)
         }
     }
     
-    @objc func handleGoogleSignIn() {
-        print("Handling Google Sign-In")
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] signInResult, error in
+    @objc func handleLogin() {
+        guard let email = loginView.emailTextField.text, !email.isEmpty,
+              let password = loginView.passwordTextField.text, !password.isEmpty else {
+            showErrorAlert(message: "Please fill in both email and password.")
+            return
+        }
+        signInToFirebase(email: email, password: password)
+    }
+    
+    func showErrorAlert(message: String){
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func signInToFirebase(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (result, error) in
+            guard let self = self else { return }
+
             if let error = error {
-                print("There is an error signing the user in ==> \(error)")
-                return
-            }
-            
-            guard let user = signInResult?.user,
-                  // Safely unwrapping the idToken
-                  let idToken = user.idToken?.tokenString else {
-                print("Google Sign-In error: Unable to extract ID token")
-                return
-            }
-            // Accessing accessToken directly since it's non-optional
-            let accessToken = user.accessToken.tokenString
-            // Creating a Firebase credential with the extracted ID token and access token
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-            // Using the Firebase credential to sign in to Firebase
-            Auth.auth().signIn(with: credential) { [weak self] authResult, error in
-                guard let self = self else { return }
-                if let error = error {
-                    print("Firebase Sign-In error: \(error.localizedDescription)")
-                    return
-                }
-                // Navigate to the main screen
-                self.navigateToMainScreen()
+                self.showErrorAlert(message: error.localizedDescription)
+            } else {
+                // Successful login
+//                self.updateAuthenticationState()
+                NotificationCenter.default.post(name: NSNotification.Name("UserDidLogin"), object: nil)
+
+                self.closeScreen()
             }
         }
     }
     
-    func navigateToMainScreen() {
-        let mainScreenVC = MainScreenViewController()
-        mainScreenVC.modalPresentationStyle = .fullScreen
-        present(mainScreenVC, animated: true)
-        
-        
-//        let mainScreenVC = MainScreenViewController()
-//        navigationController?.pushViewController(mainScreenVC, animated: true)
+    @objc func closeScreen() {
+        dismiss(animated: true, completion: nil)
     }
+
 }
