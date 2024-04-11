@@ -30,6 +30,8 @@
 		29BE6F3E2BC5D520007B6672 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29BE6F3D2BC5D520007B6672 /* GoogleService-Info.plist */; };
 		29BE6F452BC5DD34007B6672 /* Google.png in Resources */ = {isa = PBXBuildFile; fileRef = 29BE6F442BC5DD34007B6672 /* Google.png */; };
 		29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F472BC6F6C7007B6672 /* AddRecipeScreenViewController.swift */; };
+		29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */; };
+		29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */; };
 		A00232032BBDADE100D5BF20 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00232022BBDADE100D5BF20 /* ProfileViewController.swift */; };
 		A0D335512BC7424A00FCF019 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335502BC7424A00FCF019 /* GoogleSignIn */; };
 		A0D335532BC7424A00FCF019 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335522BC7424A00FCF019 /* GoogleSignInSwift */; };
@@ -87,6 +89,8 @@
 		29BE6F3D2BC5D520007B6672 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29BE6F442BC5DD34007B6672 /* Google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Google.png; path = "CS5520 Final Project/Google.png"; sourceTree = SOURCE_ROOT; };
 		29BE6F472BC6F6C7007B6672 /* AddRecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeScreenViewController.swift; sourceTree = "<group>"; };
+		29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerViewController.swift; sourceTree = "<group>"; };
+		29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithGoogleViewController.swift; sourceTree = "<group>"; };
 		A00232022BBDADE100D5BF20 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A0D3355F2BC836AE00FCF019 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +133,7 @@
 				29BE6F442BC5DD34007B6672 /* Google.png */,
 				29474A312BAFB95A00364FCC /* LoginScreen.swift */,
 				29474A4D2BBD265600364FCC /* LoginViewController.swift */,
+				29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */,
 			);
 			path = "Login Screen";
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			children = (
 				29474A342BAFDF0100364FCC /* SignUpScreen.swift */,
 				29474A4B2BBD264400364FCC /* SignUpViewController.swift */,
+				29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */,
 			);
 			path = "Signup Screen";
 			sourceTree = "<group>";
@@ -395,11 +401,16 @@
 			files = (
 				29474A4E2BBD265600364FCC /* LoginViewController.swift in Sources */,
 				29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */,
+
 				A0D335602BC836AE00FCF019 /* PhotoManager.swift in Sources */,
+
+				29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */,
+
 				29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */,
 				29474A442BAFDFF800364FCC /* MainScreen.swift in Sources */,
 				29474A482BBD060A00364FCC /* ContentCardCell.swift in Sources */,
 				29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */,
+				29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */,
 				29474A4A2BBD1D7600364FCC /* MainScreenViewController.swift in Sources */,
 				29474A382BAFDF2600364FCC /* ProfileScreen.swift in Sources */,
 				298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */,
