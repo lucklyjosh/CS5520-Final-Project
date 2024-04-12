@@ -10,13 +10,32 @@ import UIKit
 
 class AddRecipeScreen: UIView {
     
-    let recipeImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "default_recipe_image") // 设置默认图片
-        return imageView
-    }()
+    var picture: UIButton!
+    
+//    let picture: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("", for: .normal)
+//        button.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+//        button.contentHorizontalAlignment = .fill
+//        button.contentVerticalAlignment = .fill
+//        button.imageView?.contentMode = .scaleAspectFit
+//        button.showsMenuAsPrimaryAction = true
+//        button.showsMenuAsPrimaryAction = true
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
+    func setupbuttonTakePhoto(){
+        picture = UIButton(type: .system)
+        picture.setTitle("", for: .normal)
+        picture.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+        picture.contentHorizontalAlignment = .fill
+        picture.contentVerticalAlignment = .fill
+        picture.imageView?.contentMode = .scaleAspectFit
+        picture.showsMenuAsPrimaryAction = true
+        picture.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(picture)
+    }
     
     let recipeNameTextField: UITextField = {
         let textField = UITextField()
@@ -25,28 +44,22 @@ class AddRecipeScreen: UIView {
         return textField
     }()
     
-    let ingredientsTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 16)
-        textView.textColor = .gray
-        textView.text = "List ingredients"
-        return textView
-    }()
-    
-    let instructionsTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 16)
-        textView.textColor = .gray
-        textView.text = "Add cooking steps"
-        return textView
-    }()
-    
-    let recipeTypeTextField: UITextField = {
+    let ingredientsTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Add recipe type"
         textField.font = UIFont.systemFont(ofSize: 16)
+        textField.textColor = .gray
+        textField.placeholder = "List ingredients"
         return textField
     }()
+    
+    let instructionsTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.textColor = .gray
+        textField.placeholder = "Add cooking steps"
+        return textField
+    }()
+
     
     let addButton: UIButton = {
         let button = UIButton(type: .system)
@@ -71,48 +84,47 @@ class AddRecipeScreen: UIView {
     
     private func setupUI() {
         backgroundColor = .white
+        setupbuttonTakePhoto()
         
-        addSubview(recipeImageView)
+        addSubview(picture)
         addSubview(recipeNameTextField)
-        addSubview(ingredientsTextView)
-        addSubview(instructionsTextView)
-        addSubview(recipeTypeTextField)
+        addSubview(ingredientsTextField)
+        addSubview(instructionsTextField)
         addSubview(addButton)
         
-        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
+        picture.translatesAutoresizingMaskIntoConstraints = false
         recipeNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        ingredientsTextView.translatesAutoresizingMaskIntoConstraints = false
-        instructionsTextView.translatesAutoresizingMaskIntoConstraints = false
-        recipeTypeTextField.translatesAutoresizingMaskIntoConstraints = false
+        ingredientsTextField.translatesAutoresizingMaskIntoConstraints = false
+        instructionsTextField.translatesAutoresizingMaskIntoConstraints = false
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: topAnchor),
-            recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            recipeImageView.heightAnchor.constraint(equalToConstant: 200),
+//            picture.topAnchor.constraint(equalTo: topAnchor),
+//            picture.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            picture.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            picture.heightAnchor.constraint(equalToConstant: 150),
+//            
+            picture.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            picture.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            picture.widthAnchor.constraint(equalToConstant: 100),
+            picture.heightAnchor.constraint(equalToConstant: 100),
             
-            recipeNameTextField.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 16),
+            recipeNameTextField.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: 16),
             recipeNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             recipeNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             recipeNameTextField.heightAnchor.constraint(equalToConstant: 44),
             
-            ingredientsTextView.topAnchor.constraint(equalTo: recipeNameTextField.bottomAnchor, constant: 16),
-            ingredientsTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            ingredientsTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            ingredientsTextView.heightAnchor.constraint(equalToConstant: 100),
+            ingredientsTextField.topAnchor.constraint(equalTo: recipeNameTextField.bottomAnchor, constant: 16),
+            ingredientsTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            ingredientsTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            ingredientsTextField.heightAnchor.constraint(equalToConstant: 100),
             
-            instructionsTextView.topAnchor.constraint(equalTo: ingredientsTextView.bottomAnchor, constant: 16),
-            instructionsTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            instructionsTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            instructionsTextView.heightAnchor.constraint(equalToConstant: 100),
+            instructionsTextField.topAnchor.constraint(equalTo: ingredientsTextField.bottomAnchor, constant: 16),
+            instructionsTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            instructionsTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            instructionsTextField.heightAnchor.constraint(equalToConstant: 100),
             
-            recipeTypeTextField.topAnchor.constraint(equalTo: instructionsTextView.bottomAnchor, constant: 16),
-            recipeTypeTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            recipeTypeTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            recipeTypeTextField.heightAnchor.constraint(equalToConstant: 44),
-            
-            addButton.topAnchor.constraint(equalTo: recipeTypeTextField.bottomAnchor, constant: 16),
+            addButton.topAnchor.constraint(equalTo:instructionsTextField.bottomAnchor, constant: 16),
             addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             addButton.heightAnchor.constraint(equalToConstant: 50),
@@ -120,6 +132,7 @@ class AddRecipeScreen: UIView {
         ])
     }
 }
+
 
 
 

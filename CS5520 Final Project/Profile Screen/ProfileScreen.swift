@@ -122,6 +122,7 @@ class ProfileView: UIView {
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(profilePicture)
     }
+    
     func setupbuttonuserPosts(){
         userPosts = UIButton(type: .system)
         userPosts.setTitle("My Posts", for: .normal)
