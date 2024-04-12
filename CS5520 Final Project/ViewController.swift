@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 //    }
 
     let mainScreen = MainScreen()
+//    var recipes = [Recipe]()
     
     override func loadView() {
         view = mainScreen
@@ -47,6 +48,13 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         updateAuthenticationState()
     }
+    
+//    func 
+//    delegateOnAddRecipe(recipe:Recipe){
+//        recipes.append(recipe)
+//        print(recipes)
+//        mainScreen.tableViewContacts.reloadData()
+//    }
 
     
     @objc func updateAuthenticationState() {

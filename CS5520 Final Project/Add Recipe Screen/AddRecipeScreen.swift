@@ -10,32 +10,32 @@ import UIKit
 
 class AddRecipeScreen: UIView {
     
-    var picture: UIButton!
+//    var picture: UIButton!
     
-//    let picture: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("", for: .normal)
-//        button.setImage(UIImage(systemName: "camera.fill"), for: .normal)
-//        button.contentHorizontalAlignment = .fill
-//        button.contentVerticalAlignment = .fill
-//        button.imageView?.contentMode = .scaleAspectFit
-//        button.showsMenuAsPrimaryAction = true
-//        button.showsMenuAsPrimaryAction = true
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
+    let picture: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.showsMenuAsPrimaryAction = true
+        button.showsMenuAsPrimaryAction = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
-    func setupbuttonTakePhoto(){
-        picture = UIButton(type: .system)
-        picture.setTitle("", for: .normal)
-        picture.setImage(UIImage(systemName: "camera.fill"), for: .normal)
-        picture.contentHorizontalAlignment = .fill
-        picture.contentVerticalAlignment = .fill
-        picture.imageView?.contentMode = .scaleAspectFit
-        picture.showsMenuAsPrimaryAction = true
-        picture.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(picture)
-    }
+//    func setupbuttonTakePhoto(){
+//        picture = UIButton(type: .system)
+//        picture.setTitle("", for: .normal)
+//        picture.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+//        picture.contentHorizontalAlignment = .fill
+//        picture.contentVerticalAlignment = .fill
+//        picture.imageView?.contentMode = .scaleAspectFit
+//        picture.showsMenuAsPrimaryAction = true
+//        picture.translatesAutoresizingMaskIntoConstraints = false
+//        self.addSubview(picture)
+//    }
     
     let recipeNameTextField: UITextField = {
         let textField = UITextField()
@@ -61,15 +61,15 @@ class AddRecipeScreen: UIView {
     }()
 
     
-    let addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add →", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(red: 255/255, green: 0, blue: 127/255, alpha: 1)
-        button.layer.cornerRadius = 20
-        return button
-    }()
+//    let addButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Add →", for: .normal)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = UIColor(red: 255/255, green: 0, blue: 127/255, alpha: 1)
+//        button.layer.cornerRadius = 20
+//        return button
+//    }()
     
     
     
@@ -84,19 +84,19 @@ class AddRecipeScreen: UIView {
     
     private func setupUI() {
         backgroundColor = .white
-        setupbuttonTakePhoto()
+//        setupbuttonTakePhoto()
         
         addSubview(picture)
         addSubview(recipeNameTextField)
         addSubview(ingredientsTextField)
         addSubview(instructionsTextField)
-        addSubview(addButton)
+//        addSubview(addButton)
         
         picture.translatesAutoresizingMaskIntoConstraints = false
         recipeNameTextField.translatesAutoresizingMaskIntoConstraints = false
         ingredientsTextField.translatesAutoresizingMaskIntoConstraints = false
         instructionsTextField.translatesAutoresizingMaskIntoConstraints = false
-        addButton.translatesAutoresizingMaskIntoConstraints = false
+//        addButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
 //            picture.topAnchor.constraint(equalTo: topAnchor),
@@ -124,11 +124,11 @@ class AddRecipeScreen: UIView {
             instructionsTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             instructionsTextField.heightAnchor.constraint(equalToConstant: 100),
             
-            addButton.topAnchor.constraint(equalTo:instructionsTextField.bottomAnchor, constant: 16),
-            addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            addButton.heightAnchor.constraint(equalToConstant: 50),
-            addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+//            addButton.topAnchor.constraint(equalTo:instructionsTextField.bottomAnchor, constant: 16),
+//            addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+//            addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            addButton.heightAnchor.constraint(equalToConstant: 50),
+//            addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }

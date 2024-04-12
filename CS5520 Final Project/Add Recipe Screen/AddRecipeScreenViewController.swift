@@ -10,35 +10,45 @@ import PhotosUI
 
 class AddRecipeScreenViewController: UIViewController{
     
-//    
-//    override func loadView() {
-//        // Setting the ProfileView as the main view of ProfileViewController
-//        view = AddRecipeScreen()
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        // Do any additional setup after loading the view.
-//    }
+    //
+    //    override func loadView() {
+    //        // Setting the ProfileView as the main view of ProfileViewController
+    //        view = AddRecipeScreen()
+    //    }
+    //
+    //    override func viewDidLoad() {
+    //        super.viewDidLoad()
+    //        // Do any additional setup after loading the view.
+    //    }
     
     
- 
+    
     let addRecipeScreen = AddRecipeScreen()
-
-    override func loadView() {
-        // Setting the ProfileView as the main view of ProfileViewController
-        view = addRecipeScreen
-    }
+    
+    
+    //MARK: delegate to ViewController when getting back...
+    var delegate:ViewController!
     
     //MARK: variable to store the picked Image...
     var pickedImage:UIImage?
     //codes omitted...
     
+    override func loadView() {
+        // Setting the ProfileView as the main view of ProfileViewController
+        view = addRecipeScreen
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //codes omitted...
+        
         addRecipeScreen.picture.menu = getMenuImagePicker()
-        //codes omitted...
+        //MARK: setting the add button to the navigation controller...
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save, target: self,
+            action: #selector(onSaveButtonTapped)
+        )
     }
     
     //MARK: menu for buttonTakePhoto setup...
@@ -75,5 +85,64 @@ class AddRecipeScreenViewController: UIViewController{
         
         photoPicker.delegate = self
         present(photoPicker, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert(message: String){
+        let alert = UIAlertController(
+            title: "Error!", message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
+    }
+    
+    //MARK: submit button tapped action...
+    @objc func onSaveButtonTapped(){
+        
+        // Check if email is valid
+        if let name = addRecipeScreen.recipeNameTextField.text,!name.isEmpty {
+        } else {
+            showErrorAlert(message: "Nmae field cannot be empty.")
+        }
+        // Check if userName is valid
+        if let ingredients = addRecipeScreen.ingredientsTextField.text,!ingredients.isEmpty {
+            
+        } else {
+            // Handle case where email field is empty
+            showErrorAlert(message: "ingredients field cannot be empty.")
+        }
+        // Check if email is valid
+        if let instructions = addRecipeScreen.instructionsTextField.text,!instructions.isEmpty {
+            
+        } else {
+            // Handle case where email field is empty
+            showErrorAlert(message: "instruciotns field cannot be empty.")
+        }
+        
+        //        if let name = addRecipeScreen.recipeNameTextField.text,
+        //           let ingredients = addRecipeScreen.ingredientsTextField.text,
+        //           let instructions = addRecipeScreen.instructionsTextField.text,
+        //           let image = addRecipeScreen.picture.imageView{
+        //
+        //                        // All fields have values
+        //                        let newRecipe = Recipe(name: name,
+        //                                              ingredients: ingredients,
+        //                                                 instructions: instructions,
+        //                                              image: pickedImage ?? (UIImage(systemName: "photo"))!
+        //                        )
+        //                        delegate.delegateOnAddRecipe(recipe: newRecipe)
+        //
+        //                    let detailScreenViewController = DetailScreenViewController()
+        //                    detailScreenViewController.receivedPackage = newContact
+        //                    navigationController?.popViewController(animated: true)
+        //                } else {
+        //                    // Some fields are empty
+        //                }
+        //
+        //            }
+        
+        
     }
 }

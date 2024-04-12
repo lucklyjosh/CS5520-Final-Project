@@ -34,6 +34,7 @@
 		29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */; };
 		751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */; };
 		75DCF94A2BC96687001F93A8 /* PhotoMaganer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */; };
+		75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF94E2BC9845E001F93A8 /* Recipe.swift */; };
 		A00232032BBDADE100D5BF20 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00232022BBDADE100D5BF20 /* ProfileViewController.swift */; };
 		A0D335512BC7424A00FCF019 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335502BC7424A00FCF019 /* GoogleSignIn */; };
 		A0D335532BC7424A00FCF019 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335522BC7424A00FCF019 /* GoogleSignInSwift */; };
@@ -95,6 +96,7 @@
 		29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithGoogleViewController.swift; sourceTree = "<group>"; };
 		751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreenViewController.swift; sourceTree = "<group>"; };
 		75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMaganer.swift; sourceTree = "<group>"; };
+		75DCF94E2BC9845E001F93A8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A00232022BBDADE100D5BF20 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A0D3355F2BC836AE00FCF019 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +225,7 @@
 		298F69952BAFAFAE00CE9FDD /* CS5520 Final Project */ = {
 			isa = PBXGroup;
 			children = (
+				75DCF94B2BC97B1C001F93A8 /* Data Model */,
 				29474A422BAFDFE800364FCC /* Main Screen */,
 				29474A3F2BAFDFA100364FCC /* Generate Recipe Screen */,
 				29474A3C2BAFDF5900364FCC /* Recipe Screen */,
@@ -257,6 +260,14 @@
 				298F69B92BAFAFB100CE9FDD /* CS5520_Final_ProjectUITestsLaunchTests.swift */,
 			);
 			path = "CS5520 Final ProjectUITests";
+			sourceTree = "<group>";
+		};
+		75DCF94B2BC97B1C001F93A8 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				75DCF94E2BC9845E001F93A8 /* Recipe.swift */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +437,7 @@
 				29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */,
 				751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */,
 				29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */,
+				75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
