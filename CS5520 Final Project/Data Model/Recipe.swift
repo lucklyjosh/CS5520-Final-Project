@@ -13,14 +13,14 @@ struct Recipe {
         var name:String?
         var ingredients:String?
         var instructions:String?
-        var image: UIImage?
+//        var image: UIImage?
     
         
-        init(name: String, ingredients: String,instructions: String ,image: UIImage) {
+        init(name: String, ingredients: String,instructions: String /*,image: UIImage*/) {
             self.name = name
             self.ingredients = ingredients
-            self.instructions = ingredients
-            self.image = image
+            self.instructions = instructions
+//            self.image = image
         }
     }
 
