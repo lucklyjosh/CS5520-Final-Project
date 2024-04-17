@@ -12,6 +12,7 @@ class ProfileView: UIView {
     var userName: UILabel!
     var userPosts: UIButton!
     var userLikes: UIButton!
+    var profileImageView: UIImageView!
 //    var collectionView: UICollectionView!
 //    var tableViewContacts: UITableView!
     
@@ -56,6 +57,7 @@ class ProfileView: UIView {
         
         setupuserName()
         setupbuttonTakePhoto()
+        setupprofileImageView()
         setupbuttonuserPosts()
         setupbuttonuserLikes()
         addSubview(bottomBar)
@@ -127,8 +129,22 @@ class ProfileView: UIView {
         profilePicture.imageView?.contentMode = .scaleAspectFit
         profilePicture.showsMenuAsPrimaryAction = true
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
+        profilePicture.backgroundColor = .clear
         self.addSubview(profilePicture)
     }
+    
+  
+        func setupprofileImageView(){
+            profileImageView = UIImageView()
+            profileImageView.image = UIImage(systemName: "photo")
+            profileImageView.contentMode = .scaleToFill
+            profileImageView.clipsToBounds = true
+            profileImageView.layer.cornerRadius = 10
+            profileImageView.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(profileImageView)
+        }
+
+    
     
     func setupbuttonuserPosts(){
         userPosts = UIButton(type: .system)
@@ -146,19 +162,26 @@ class ProfileView: UIView {
     func initConstraints(){
         NSLayoutConstraint.activate([
             
-            profilePicture.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
-            profilePicture.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            profilePicture.widthAnchor.constraint(equalToConstant: 100),
-            profilePicture.heightAnchor.constraint(equalToConstant: 100),
+            profileImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileImageView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            profileImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            profileImageView.widthAnchor.constraint(equalToConstant: 200),
+            profileImageView.heightAnchor.constraint(equalToConstant: 200),
             
-            userName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 32),
+            profilePicture.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 5),
+            profilePicture.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            profilePicture.widthAnchor.constraint(equalToConstant: 50),
+            profilePicture.heightAnchor.constraint(equalToConstant: 50),
+            
+            userName.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 15),
             userName.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             userPosts.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 16),
-            userPosts.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            userPosts.leadingAnchor.constraint(equalTo:leadingAnchor,constant:55),
             
-            userLikes.topAnchor.constraint(equalTo: userPosts.bottomAnchor, constant: 16),
-            userLikes.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            userLikes.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 16),
+            userLikes.trailingAnchor.constraint(equalTo: trailingAnchor,constant:-55),
             
             collectionViewInProfile.topAnchor.constraint(equalTo: userLikes.bottomAnchor, constant: 10),
             collectionViewInProfile.leadingAnchor.constraint(equalTo: leadingAnchor),

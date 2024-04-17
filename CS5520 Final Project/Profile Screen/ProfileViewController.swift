@@ -50,6 +50,8 @@ class ProfileViewController: UIViewController {
     
     let storage = Storage.storage()
     
+//    var profileImageView: UIImageView!
+    
     
     override func loadView() {
         // Setting the ProfileView as the main view of ProfileViewController
@@ -66,62 +68,142 @@ class ProfileViewController: UIViewController {
                 //MARK: not signed in...
                 self.currentUser = nil
                 self.profileScreen.userName.text = "John Doo"
-//                self.profileScreen.floatingButtonChatIcon.isEnabled = false
-//                self.profileScreen.floatingButtonChatIcon.isHidden = true
+                //                self.profileScreen.floatingButtonChatIcon.isEnabled = false
+                //                self.profileScreen.floatingButtonChatIcon.isHidden = true
                 
                 //MARK: Reset tableView...
                 self.reciptsList.removeAll()
                 
                 
                 //MARK: Sign in bar button...
-//                self.setupRightBarButton(isLoggedin: false)
+                //                self.setupRightBarButton(isLoggedin: false)
                 
             }else{
                 //MARK: the user is signed in...
                 self.currentUser = user
                 self.profileScreen.userName.text = "\(user?.displayName ?? "Anonymous")"
-//                self.profileScreen.floatingButtonChatIcon.isEnabled = true
-//                self.profileScreen.floatingButtonChatIcon.isHidden = false
+                
+                if let currentUser = Auth.auth().currentUser {
+                    let userID = currentUser.uid
+                    print("Current user ID: \(userID)")
+                } else {
+                    // No user is currently logged in
+                    print("No user is currently logged in.")
+                }
+
+                let db = Firestore.firestore()
+                
+                let docRef = db.collection("users").document(self.currentUser!.uid)
+                self.fetchData(docRef: docRef) { profileImageUrl in
+                    if let profileImageUrlString = profileImageUrl {
+                        // Convert the string URL to a URL object
+                        if let url = URL(string: profileImageUrlString) {
+                            DispatchQueue.global().async {
+                                if let imageData = try? Data(contentsOf: url) {
+                                    if let image = UIImage(data: imageData) {
+                                        
+                                        DispatchQueue.main.async {
+//                                            self.profileScreen.profilePicture.display(none)
+//                                            profileImageView.image = image
+                                        self.profileScreen.profileImageView.image = image
+//
+                                        }
+                                    } else {
+                                        print("Invalid image data")
+                                    }
+                                } else {
+                                    print("Failed to load image data from URL")
+                                }
+                            }
+                        } else {
+                            print("Invalid profile image URL")
+                            // Handle the case where the profile image URL string is invalid
+                        }
+                    } else {
+                        print("Profile image URL not available")
+                        // Handle the case where profile image URL is nil
+                    }
+                }
+
+
+
+
+                
+
+                
+                
+
+                
+                
+                
+                //                self.profileScreen.floatingButtonChatIcon.isEnabled = true
+                //                self.profileScreen.floatingButtonChatIcon.isHidden = false
                 
                 //MARK: Logout bar button...
-//                self.setupRightBarButton(isLoggedin: true)
+                //                self.setupRightBarButton(isLoggedin: true)
                 
                 
-//                if let username = user?.displayName{
-//                    self.getUserEmail(byUsername:username) { email, error in
-//                        if let error = error {
-//                            print("Error: \(error.localizedDescription)")
-//                        } else if let receiveremail = email {
-//                            
-//                            //MARK: Observe Firestore database to display the chat list...
-//                            self.database.collection("users").document(receiveremail).collection("chats")
-//                                .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
-//                                    if let documents = querySnapshot?.documents{
-//
-//                                        
-//                                        self.chatsList.removeAll()
-//                                        for document in documents{
-//                                            do{
-//                                                let chat  = try document.data(as: Recipe.self)
-//                                                self.chatsList.append(chat)
-//                                            }catch{
-//                                                print(error)
-//                                            }
-//                                        }
-//                                        self.mainScreen.tableViewContacts.reloadData()
-//                                    }
-//                                })
-//                            
-//                        }
-//                    }
-//                    
-//                }
-
+                //                if let username = user?.displayName{
+                //                    self.getUserEmail(byUsername:username) { email, error in
+                //                        if let error = error {
+                //                            print("Error: \(error.localizedDescription)")
+                //                        } else if let receiveremail = email {
+                //
+                //                            //MARK: Observe Firestore database to display the chat list...
+                //                            self.database.collection("users").document(receiveremail).collection("chats")
+                //                                .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
+                //                                    if let documents = querySnapshot?.documents{
+                //
+                //
+                //                                        self.chatsList.removeAll()
+                //                                        for document in documents{
+                //                                            do{
+                //                                                let chat  = try document.data(as: Recipe.self)
+                //                                                self.chatsList.append(chat)
+                //                                            }catch{
+                //                                                print(error)
+                //                                            }
+                //                                        }
+                //                                        self.mainScreen.tableViewContacts.reloadData()
+                //                                    }
+                //                                })
+                //
+                //                        }
+                //                    }
+                //
+                //                }
+                
             }
         }
     }
     
     //codes omitted...
+    
+    func fetchData(docRef: DocumentReference, completion: @escaping (String?) -> Void) {
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error getting document: \(error)")
+                completion(nil)
+                return
+            }
+            
+            if let document = document, document.exists {
+                let firebaseResponse = document.data()
+                if let profileImageUrl = firebaseResponse?["profileImageUrl"] as? String {
+                    print(profileImageUrl)
+                    completion(profileImageUrl)
+                } else {
+                    print("Profile image URL not found")
+                    completion(nil)
+                }
+            } else {
+                print("Document does not exist")
+                completion(nil)
+            }
+        }
+    }
+
+        
     
 
     
@@ -132,13 +214,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentUser = Auth.auth().currentUser {
-            let userID = currentUser.uid
-            print("Current user ID: \(userID)")
-        } else {
-            // No user is currently logged in
-            print("No user is currently logged in.")
-        }
+
         //codes omitted...
         profileScreen.profilePicture.menu = getMenuImagePicker()
         //codes omitted...
@@ -216,6 +292,23 @@ class ProfileViewController: UIViewController {
     }
     //codes omitted...
 }
+
+//extension UIImageView {
+//    //MARK: Borrowed from: https://www.hackingwithswift.com/example-code/uikit/how-to-load-a-remote-image-url-into-uiimageview
+//    
+//    func loadRemoteImage(from url: URL) {
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                if let image = UIImage(data: data) {
+//                    DispatchQueue.main.async {
+//                        self?.image = image
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
 
 
 
