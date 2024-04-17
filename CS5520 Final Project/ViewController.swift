@@ -7,6 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
+
 
 class ViewController: UIViewController {
 
@@ -25,11 +28,13 @@ class ViewController: UIViewController {
 //        self.title = "Foodie's Heaven"
 //    }
 
-    let mainScreen = MainScreen()
-//    var recipes = [Recipe]()
+    var mainScreen: MainScreen!
+    var recipes = [Recipe]()
     
     override func loadView() {
+        mainScreen = MainScreen()
         view = mainScreen
+        mainScreen.collectionView.dataSource = self
     }
     
     override func viewDidLoad() {
@@ -42,6 +47,9 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAuthenticationState), name: NSNotification.Name("UserDidLogin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
+        fetchRecipes()
+        mainScreen.collectionView.dataSource = self
+//        mainScreen.collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +63,31 @@ class ViewController: UIViewController {
 //        print(recipes)
 //        mainScreen.tableViewContacts.reloadData()
 //    }
+    
+    func fetchRecipes() {
+        let db = Firestore.firestore()
+        db.collection("recipes").order(by: "timestamp", descending: true).getDocuments { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
+                    let data = document.data()
+                    let name = data["name"] as? String
+                    let userName = data["userName"] as? String
+                    let ingredients = data["ingredients"] as? String
+                    let instructions = data["instructions"] as? String
+                    let image = data["photoURL"] as? String
+                    let userId = data["userId"] as? String
+                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                    return Recipe(name: name, userName: userName, ingredients: ingredients, instructions: instructions, image: image, userId: userId, timestamp: timestamp)
+                } ?? []
+                self.mainScreen.collectionView.reloadData()
+            }
+        }
+    }
+
+
 
     
     @objc func updateAuthenticationState() {
@@ -67,10 +100,7 @@ class ViewController: UIViewController {
             navigationItem.rightBarButtonItems = [barIcon, barText]
         } else {
             print("User not yet login")
-            // No user is logged in, show sign up/login button
-            let barIcon = UIBarButtonItem(image: UIImage(systemName: "person.fill.questionmark"), style: .plain, target: self, action: #selector(navigateToLogin))
-            let barText = UIBarButtonItem(title: "Sign Up", style: .plain, target: self, action: #selector(navigateToSignUp))
-            navigationItem.rightBarButtonItems = [barIcon, barText]
+            showLoginScreen()
         }
     }
 
@@ -86,20 +116,6 @@ class ViewController: UIViewController {
         present(signUpVC, animated: true, completion: nil)
     }
     
-    @objc func navigateToSignUp() {
-        let signUpVC = SignUpViewController() 
-//        navigationController?.pushViewController(signUpVC, animated: true)
-        signUpVC.modalPresentationStyle = .fullScreen
-        present(signUpVC, animated: true, completion: nil)
-    }
-
-    
-    @objc func navigateToLogin() {
-        let logInVC = LoginViewController()
-//        navigationController?.pushViewController(logInVC, animated: true)
-        logInVC.modalPresentationStyle = .fullScreen
-        present(logInVC, animated: true, completion: nil)
-    }
     
     @objc func handleLogout() {
         let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
@@ -130,4 +146,40 @@ class ViewController: UIViewController {
         
     }
 }
+
+// MARK: - UICollectionViewDataSource
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
+            fatalError("Unable to dequeue ContentCardCell")
+        }
+        let recipe = recipes[indexPath.row]
+        cell.configure(with: recipe)
+        cell.delegate = self
+        return cell
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func didTapCell(_ cell: ContentCardCell) {
+        guard let indexPath = mainScreen.collectionView.indexPath(for: cell) else { return }
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func navigateToDetail(for recipe: Recipe) {
+        let detailVC = RecipeScreenViewController()  // Ensure that this is the correct view controller class name.
+        detailVC.recipe = recipe
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
 

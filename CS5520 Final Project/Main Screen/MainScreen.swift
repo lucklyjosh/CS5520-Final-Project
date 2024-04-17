@@ -10,6 +10,9 @@ import UIKit
 class MainScreen: UIView {
     
     var buttonPF: UIButton!
+    var homeButton: UIButton!
+    var profileButton: UIButton!
+    var plusButton: UIButton!
     
     let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
 
@@ -48,17 +51,16 @@ class MainScreen: UIView {
         return view
     }()
     
-
-    private lazy var homeButton: UIButton = createBarButton(imageSystemName: "house")
-    public lazy var profileButton: UIButton = createBarButton(imageSystemName: "person.crop.circle")
-    public lazy var plusButton: UIButton = createPlusButton()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        homeButton = createBarButton(imageSystemName: "house")
+        profileButton = createBarButton(imageSystemName: "person.crop.circle")
+        plusButton = createPlusButton()
+
         setupViews()
         setupLayout()
-        collectionView.dataSource = self
+//        collectionView.dataSource = self
         collectionView.reloadData()
     }
     
@@ -169,17 +171,3 @@ class MainScreen: UIView {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension MainScreen: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        items.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
-            fatalError("Unable to dequeue ContentCardCell")
-        }
-        cell.configure(with: items[indexPath.item])
-        return cell
-    }
-}
