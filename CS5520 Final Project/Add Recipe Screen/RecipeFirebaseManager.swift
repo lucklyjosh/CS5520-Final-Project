@@ -81,32 +81,32 @@ extension AddRecipeScreenViewController{
             } else {
                 // 打印文档的ID，确认添加成功
                 print("Document added with ID: \(documentReference.documentID)")
-                //                self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
+                                self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
                 // 异步返回上一个视图控制器
+//                DispatchQueue.main.async {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+            }
+        }
+    }
+
+    /// 更新用户的 posts 数组，添加新的配方 ID
+    func updateUserPosts(with recipeId: String, forUser userId: String) {
+        let userRef = Firestore.firestore().collection("users").document(userId)
+        // 使用 FieldValue.arrayUnion 来添加新元素，避免重复
+        userRef.updateData([
+            "posts": FieldValue.arrayUnion([recipeId])
+        ]) { error in
+            if let error = error {
+                print("Error updating user posts: \(error.localizedDescription)")
+            } else {
+                print("User posts updated with new recipe ID: \(recipeId)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         }
     }
-//
-//    /// 更新用户的 posts 数组，添加新的配方 ID
-//    func updateUserPosts(with recipeId: String, forUser userId: String) {
-//        let userRef = Firestore.firestore().collection("users").document(userId)
-//        // 使用 FieldValue.arrayUnion 来添加新元素，避免重复
-//        userRef.updateData([
-//            "posts": FieldValue.arrayUnion([recipeId])
-//        ]) { error in
-//            if let error = error {
-//                print("Error updating user posts: \(error.localizedDescription)")
-//            } else {
-//                print("User posts updated with new recipe ID: \(recipeId)")
-//                DispatchQueue.main.async {
-//                    self.navigationController?.popViewController(animated: true)
-//                }
-//            }
-//        }
-//    }
 }
         
         
