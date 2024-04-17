@@ -46,10 +46,14 @@ extension AddRecipeScreenViewController{
               let ingredients = addRecipeScreen.ingredientsTextField.text,
               let instructions = addRecipeScreen.instructionsTextField.text,
               let currentUserId = Auth.auth().currentUser?.uid,
-              let photoURL = photoURL else {
+              let currentUser = Auth.auth().currentUser,
+              let photoURL = photoURL
+         else {
             print("Error: One or more fields are empty.")
             return
         }
+        
+        let userName = currentUser.displayName ?? "Unknown User"
         
         
         // 获取对 Firestore 数据库的引用
@@ -64,6 +68,7 @@ extension AddRecipeScreenViewController{
             "ingredients": ingredients,
             "instructions": instructions,
             "currentUserId" : currentUserId,
+            "userName":userName,
             "timestamp": Int64(Date().timeIntervalSince1970 * 1000),
             "photoURL": photoURL.absoluteString
         ]
@@ -76,6 +81,7 @@ extension AddRecipeScreenViewController{
             } else {
                 // 打印文档的ID，确认添加成功
                 print("Document added with ID: \(documentReference.documentID)")
+                //                self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
                 // 异步返回上一个视图控制器
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
@@ -83,6 +89,24 @@ extension AddRecipeScreenViewController{
             }
         }
     }
+//
+//    /// 更新用户的 posts 数组，添加新的配方 ID
+//    func updateUserPosts(with recipeId: String, forUser userId: String) {
+//        let userRef = Firestore.firestore().collection("users").document(userId)
+//        // 使用 FieldValue.arrayUnion 来添加新元素，避免重复
+//        userRef.updateData([
+//            "posts": FieldValue.arrayUnion([recipeId])
+//        ]) { error in
+//            if let error = error {
+//                print("Error updating user posts: \(error.localizedDescription)")
+//            } else {
+//                print("User posts updated with new recipe ID: \(recipeId)")
+//                DispatchQueue.main.async {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        }
+//    }
 }
         
         

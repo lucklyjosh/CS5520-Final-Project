@@ -11,6 +11,7 @@ import UIKit
 //MARK: struct to create a package to send to the Display Screen...
 struct Recipe {
         var name:String?
+        var userName: String?
         var ingredients:String?
         var instructions:String?
         var image: String?
@@ -19,8 +20,9 @@ struct Recipe {
     
     
         
-    init(name: String, ingredients: String,instructions: String ,image: String, userId: String, timestamp:Date ) {
+    init(name: String, ingredients: String,instructions: String ,image: String, userId: String, timestamp:Date, userName: String ) {
             self.name = name
+            self.userName = userName
             self.ingredients = ingredients
             self.instructions = instructions
             self.image = image
