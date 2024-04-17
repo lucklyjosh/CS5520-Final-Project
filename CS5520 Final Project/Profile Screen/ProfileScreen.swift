@@ -68,13 +68,13 @@ class ProfileView: UIView {
         bottomBar.addSubview(plusButton)
 
         addBorderLineToView(bottomBar, atTop: true)
-<<<<<<< HEAD
-        collectionViewInProfile.dataSource = self
+//<<<<<<< HEAD
+//        collectionViewInProfile.dataSource = self
         collectionViewInProfile.reloadData()
-=======
-//        collectionView.dataSource = self
-        collectionView.reloadData()
->>>>>>> 5a1124def34c1eda19e6e848d3dc123bf4c6a7b0
+//=======
+////        collectionView.dataSource = self
+//        collectionView.reloadData()
+//>>>>>>> 5a1124def34c1eda19e6e848d3dc123bf4c6a7b0
         
         initConstraints()
     }
