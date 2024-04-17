@@ -103,7 +103,7 @@ class AddRecipeScreen: UIView {
 //            picture.leadingAnchor.constraint(equalTo: leadingAnchor),
 //            picture.trailingAnchor.constraint(equalTo: trailingAnchor),
 //            picture.heightAnchor.constraint(equalToConstant: 150),
-//            
+//
             picture.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
             picture.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             picture.widthAnchor.constraint(equalToConstant: 100),
@@ -132,7 +132,6 @@ class AddRecipeScreen: UIView {
         ])
     }
 }
-
 
 
 
