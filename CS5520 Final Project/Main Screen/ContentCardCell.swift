@@ -24,9 +24,15 @@ class ContentCardCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .black
+        let image = UIImage(named: "default")
+        if image == nil {
+            print("Failed to load 'defaultImage'. Check if it's added to assets and named correctly.")
+        }
+        imageView.image = image
         return imageView
     }()
+
+
     
     var titleLabel: UILabel = {
         let label = UILabel()
@@ -75,7 +81,7 @@ class ContentCardCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75),  // Image takes 75% of cell height
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
@@ -101,7 +107,8 @@ class ContentCardCell: UICollectionViewCell {
     func configure(with title: String? = nil, author: String? = nil, image: UIImage? = nil) {
         titleLabel.text = title ?? "Default Title"
         authorLabel.text = author ?? "Default Author"
-        imageView.image = image  // If nil, it will maintain the default black background
+        imageView.image = image ?? UIImage(named: "default")  // Use default image if none is provided
     }
+
     
 }

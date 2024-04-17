@@ -116,8 +116,19 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(AddRecipeScreen, animated: true)
         
     }
-    
-
-
 }
 
+// MARK: - UICollectionViewDataSource
+extension MainScreen: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
+            fatalError("Unable to dequeue ContentCardCell")
+        }
+        cell.configure(with: items[indexPath.item])
+        return cell
+    }
+}

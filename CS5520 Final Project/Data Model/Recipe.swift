@@ -25,23 +25,34 @@
 //    }
 
 import Foundation
+import UIKit
 
-struct Recipe: Decodable {
+struct Recipe {
     var id: String
     var name: String
     var ingredients: String
     var instructions: String
-    var imageUrl: String
-    var likes: [String]
+    var imageUrl: String // URL to the image stored in Firebase Storage
+    var likes: [String] // User IDs of users who have liked this recipe
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case ingredients
-        case instructions
-        case imageUrl
-        case likes
+    init(id: String = UUID().uuidString, name: String, ingredients: String, instructions: String, imageUrl: String, likes: [String] = []) {
+        self.id = id
+        self.name = name
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.imageUrl = imageUrl
+        self.likes = likes
+    }
+
+    var dictionary: [String: Any] {
+        return [
+            "id": id,
+            "name": name,
+            "ingredients": ingredients,
+            "instructions": instructions,
+            "imageUrl": imageUrl,
+            "likes": likes
+        ]
     }
 }
-
 
