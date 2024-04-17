@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ContentCardCellDelegate: AnyObject {
+    func didTapCell(_ cell: ContentCardCell)
+}
+
 class ContentCardCell: UICollectionViewCell {
     static let identifier = "ContentCardCell"
-
+    weak var delegate: ContentCardCellDelegate?
+    
+    
     var likeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -58,12 +64,17 @@ class ContentCardCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc func handleTap() {
+        delegate?.didTapCell(self)
+    }
+    
     func setupViews() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -103,12 +114,26 @@ class ContentCardCell: UICollectionViewCell {
         likeButton.isSelected = !likeButton.isSelected
     }
     
-    
-    func configure(with title: String? = nil, author: String? = nil, image: UIImage? = nil) {
-        titleLabel.text = title ?? "Default Title"
-        authorLabel.text = author ?? "Default Author"
-        imageView.image = image ?? UIImage(named: "default")  // Use default image if none is provided
+    func configure(with recipe: Recipe) {
+        titleLabel.text = recipe.name ?? "No Name"
+        authorLabel.text = recipe.userName ?? "Anonymous"
+
+        if let imageUrl = recipe.image, let url = URL(string: imageUrl) {
+            // Use an asynchronous method to download and set the image
+            loadImage(from: url)
+        } else {
+            imageView.image = UIImage(named: "default")  // Use default image if URL is invalid
+        }
     }
 
-    
+    func loadImage(from url: URL) {
+        // This method should asynchronously load the image from the URL and set it to imageView
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }.resume()
+    }
+
 }

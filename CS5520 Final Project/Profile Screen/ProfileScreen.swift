@@ -59,7 +59,7 @@ class ProfileView: UIView {
         bottomBar.addSubview(plusButton)
 
         addBorderLineToView(bottomBar, atTop: true)
-        collectionView.dataSource = self
+//        collectionView.dataSource = self
         collectionView.reloadData()
         
         initConstraints()
@@ -187,16 +187,17 @@ class ProfileView: UIView {
 
 }
 
-extension ProfileView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        items.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
-            fatalError("Unable to dequeue ContentCardCell")
-        }
-        cell.configure(with: items[indexPath.item])
-        return cell
-    }
-}
+//extension ProfileView: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        items.count
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
+//            fatalError("Unable to dequeue ContentCardCell")
+//        }
+////        cell.configure(with: items[indexPath.item])
+//        cell.configure(with: recipe)
+//        return cell
+//    }
+//}

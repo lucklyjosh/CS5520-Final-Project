@@ -29,11 +29,12 @@ class ViewController: UIViewController {
 //    }
 
     var mainScreen: MainScreen!
-//    var recipes = [Recipe]()
+    var recipes = [Recipe]()
     
     override func loadView() {
         mainScreen = MainScreen()
         view = mainScreen
+        mainScreen.collectionView.dataSource = self
     }
     
     override func viewDidLoad() {
@@ -46,6 +47,9 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAuthenticationState), name: NSNotification.Name("UserDidLogin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
+        fetchRecipes()
+        mainScreen.collectionView.dataSource = self
+//        mainScreen.collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +63,31 @@ class ViewController: UIViewController {
 //        print(recipes)
 //        mainScreen.tableViewContacts.reloadData()
 //    }
+    
+    func fetchRecipes() {
+        let db = Firestore.firestore()
+        db.collection("recipes").order(by: "timestamp", descending: true).getDocuments { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
+                    let data = document.data()
+                    let name = data["name"] as? String
+                    let userName = data["userName"] as? String
+                    let ingredients = data["ingredients"] as? String
+                    let instructions = data["instructions"] as? String
+                    let image = data["photoURL"] as? String
+                    let userId = data["userId"] as? String
+                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                    return Recipe(name: name, userName: userName, ingredients: ingredients, instructions: instructions, image: image, userId: userId, timestamp: timestamp)
+                } ?? []
+                self.mainScreen.collectionView.reloadData()
+            }
+        }
+    }
+
+
 
     
     @objc func updateAuthenticationState() {
@@ -119,16 +148,38 @@ class ViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension MainScreen: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        items.count
+        return recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
             fatalError("Unable to dequeue ContentCardCell")
         }
-        cell.configure(with: items[indexPath.item])
+        let recipe = recipes[indexPath.row]
+        cell.configure(with: recipe)
+        cell.delegate = self
         return cell
     }
+
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func didTapCell(_ cell: ContentCardCell) {
+        guard let indexPath = mainScreen.collectionView.indexPath(for: cell) else { return }
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func navigateToDetail(for recipe: Recipe) {
+        let detailVC = RecipeScreenViewController()  // Ensure that this is the correct view controller class name.
+        detailVC.recipe = recipe
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
+
+

@@ -60,7 +60,7 @@ class MainScreen: UIView {
 
         setupViews()
         setupLayout()
-        collectionView.dataSource = self
+//        collectionView.dataSource = self
         collectionView.reloadData()
     }
     
