@@ -7,6 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
+
 
 class ViewController: UIViewController {
 
@@ -25,10 +28,11 @@ class ViewController: UIViewController {
 //        self.title = "Foodie's Heaven"
 //    }
 
-    let mainScreen = MainScreen()
+    var mainScreen: MainScreen!
 //    var recipes = [Recipe]()
     
     override func loadView() {
+        mainScreen = MainScreen()
         view = mainScreen
     }
     
@@ -67,10 +71,7 @@ class ViewController: UIViewController {
             navigationItem.rightBarButtonItems = [barIcon, barText]
         } else {
             print("User not yet login")
-            // No user is logged in, show sign up/login button
-            let barIcon = UIBarButtonItem(image: UIImage(systemName: "person.fill.questionmark"), style: .plain, target: self, action: #selector(navigateToLogin))
-            let barText = UIBarButtonItem(title: "Sign Up", style: .plain, target: self, action: #selector(navigateToSignUp))
-            navigationItem.rightBarButtonItems = [barIcon, barText]
+            showLoginScreen()
         }
     }
 
@@ -86,20 +87,6 @@ class ViewController: UIViewController {
         present(signUpVC, animated: true, completion: nil)
     }
     
-    @objc func navigateToSignUp() {
-        let signUpVC = SignUpViewController() 
-//        navigationController?.pushViewController(signUpVC, animated: true)
-        signUpVC.modalPresentationStyle = .fullScreen
-        present(signUpVC, animated: true, completion: nil)
-    }
-
-    
-    @objc func navigateToLogin() {
-        let logInVC = LoginViewController()
-//        navigationController?.pushViewController(logInVC, animated: true)
-        logInVC.modalPresentationStyle = .fullScreen
-        present(logInVC, animated: true, completion: nil)
-    }
     
     @objc func handleLogout() {
         let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
@@ -129,5 +116,8 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(AddRecipeScreen, animated: true)
         
     }
+    
+
+
 }
 

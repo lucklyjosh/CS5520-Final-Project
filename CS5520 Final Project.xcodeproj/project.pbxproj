@@ -32,6 +32,8 @@
 		29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F472BC6F6C7007B6672 /* AddRecipeScreenViewController.swift */; };
 		29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */; };
 		29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */; };
+		29BE6F502BCF0330007B6672 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4F2BCF0330007B6672 /* User.swift */; };
+		29BE6F522BCF980C007B6672 /* ContentCardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */; };
 		751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */; };
 		75DCF94A2BC96687001F93A8 /* PhotoMaganer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */; };
 		75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF94E2BC9845E001F93A8 /* Recipe.swift */; };
@@ -94,6 +96,8 @@
 		29BE6F472BC6F6C7007B6672 /* AddRecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeScreenViewController.swift; sourceTree = "<group>"; };
 		29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerViewController.swift; sourceTree = "<group>"; };
 		29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithGoogleViewController.swift; sourceTree = "<group>"; };
+		29BE6F4F2BCF0330007B6672 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCardCellViewController.swift; sourceTree = "<group>"; };
 		751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreenViewController.swift; sourceTree = "<group>"; };
 		75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMaganer.swift; sourceTree = "<group>"; };
 		75DCF94E2BC9845E001F93A8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			children = (
 				29474A432BAFDFF800364FCC /* MainScreen.swift */,
 				29474A472BBD060A00364FCC /* ContentCardCell.swift */,
+				29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */,
 				29474A492BBD1D7600364FCC /* MainScreenViewController.swift */,
 			);
 			path = "Main Screen";
@@ -266,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				75DCF94E2BC9845E001F93A8 /* Recipe.swift */,
+				29BE6F4F2BCF0330007B6672 /* User.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -434,10 +440,12 @@
 				298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */,
 				A00232032BBDADE100D5BF20 /* ProfileViewController.swift in Sources */,
 				29474A4C2BBD264400364FCC /* SignUpViewController.swift in Sources */,
+				29BE6F522BCF980C007B6672 /* ContentCardCellViewController.swift in Sources */,
 				29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */,
 				751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */,
 				29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */,
 				75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */,
+				29BE6F502BCF0330007B6672 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
