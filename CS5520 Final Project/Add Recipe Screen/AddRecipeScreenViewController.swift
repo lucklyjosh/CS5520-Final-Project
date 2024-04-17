@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import FirebaseStorage
 
 class AddRecipeScreenViewController: UIViewController{
     
@@ -24,6 +25,7 @@ class AddRecipeScreenViewController: UIViewController{
     
     
     let addRecipeScreen = AddRecipeScreen()
+    let storage = Storage.storage()
     
     
     //MARK: delegate to ViewController when getting back...
@@ -120,6 +122,11 @@ class AddRecipeScreenViewController: UIViewController{
             // Handle case where email field is empty
             showErrorAlert(message: "instruciotns field cannot be empty.")
         }
+            //MARK: creating a new user on Firebase with photo...
+//            showActivityIndicator()
+            uploadRecipePhotoToStorage()
+    }
+}
         
         //        if let name = addRecipeScreen.recipeNameTextField.text,
         //           let ingredients = addRecipeScreen.ingredientsTextField.text,
@@ -142,7 +149,4 @@ class AddRecipeScreenViewController: UIViewController{
         //                }
         //
         //            }
-        
-        
-    }
-}
+

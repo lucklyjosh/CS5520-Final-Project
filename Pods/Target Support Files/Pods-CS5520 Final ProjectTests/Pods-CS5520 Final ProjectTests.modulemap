@@ -1,0 +1,6 @@
+framework module Pods_CS5520_Final_ProjectTests {
+  umbrella header "Pods-CS5520 Final ProjectTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
