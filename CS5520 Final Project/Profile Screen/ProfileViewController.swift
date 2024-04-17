@@ -34,6 +34,7 @@ import UIKit
 import PhotosUI
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -46,6 +47,8 @@ class ProfileViewController: UIViewController {
     let database = Firestore.firestore()
     
     var reciptsList = [Recipe]()
+    
+    let storage = Storage.storage()
     
     
     override func loadView() {
@@ -128,11 +131,53 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let currentUser = Auth.auth().currentUser {
+            let userID = currentUser.uid
+            print("Current user ID: \(userID)")
+        } else {
+            // No user is currently logged in
+            print("No user is currently logged in.")
+        }
         //codes omitted...
         profileScreen.profilePicture.menu = getMenuImagePicker()
         //codes omitted...
         self.profileScreen.collectionViewInProfile.reloadData()
+//        profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
     }
+    
+//fetch data from the fibase store and display
+//    @objc func onButtonUserPostsTapped() {
+//        let messageText = chatScreen.messageInputField.text ?? ""
+//        if let senderEmail = Auth.auth().currentUser?.email, !messageText.isEmpty {
+//            
+//            getUserEmail(byUsername: chatPartnerName!) { email, error in
+//                if let error = error {
+//                    print("Error: \(error.localizedDescription)")
+//                } else if let receiveremail = email {
+//                    print("receiver's email is: \(receiveremail)")
+//                    
+//                    self.checkOrCreateChat(with: receiveremail, senderEmail: senderEmail) { chatID in
+//                               if let chatID = chatID {
+//                                   self.addMessageToChat(chatID: chatID, messageText: messageText, senderEmail: senderEmail)
+//                                   self.updateLastMessage(chatID: chatID, messageText: messageText, receiverEmail: receiveremail, senderEmail: senderEmail)
+//                                   self.messages.removeAll()
+//                                   self.chatScreen.messageInputField.text = ""
+//                                   
+//                               } else {
+//                                   // Handle the case where chatID couldn't be created or retrieved
+//                               }
+//                           }
+//                    
+//                } else {
+//                    print("No user found with that username")
+//                }
+//            }
+//
+//        } else {
+//            // Handle the case where the message is empty or user email is not available
+//        }
+//    }
     
     //MARK: menu for buttonTakePhoto setup...
     func getMenuImagePicker() -> UIMenu{

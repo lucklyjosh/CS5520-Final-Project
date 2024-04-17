@@ -29,6 +29,7 @@ extension ProfileViewController:PHPickerViewControllerDelegate{
                                     for: .normal
                                 )
                                 self.pickedImage = uwImage
+                                self.uploadProfilePhotoToStorage()
                             }
                         }
                     }
@@ -49,6 +50,7 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
                 for: .normal
             )
             self.pickedImage = image
+            self.uploadProfilePhotoToStorage()
         }else{
             // Do your thing for No image loaded...
         }
