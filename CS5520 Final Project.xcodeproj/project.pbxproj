@@ -38,6 +38,8 @@
 		75DCF94A2BC96687001F93A8 /* PhotoMaganer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */; };
 		75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF94E2BC9845E001F93A8 /* Recipe.swift */; };
 		A00232032BBDADE100D5BF20 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00232022BBDADE100D5BF20 /* ProfileViewController.swift */; };
+		A04210312BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04210302BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift */; };
+		A04210332BD00113007C32E3 /* ImageViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04210322BD00113007C32E3 /* ImageViewUtils.swift */; };
 		A0D335512BC7424A00FCF019 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335502BC7424A00FCF019 /* GoogleSignIn */; };
 		A0D335532BC7424A00FCF019 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335522BC7424A00FCF019 /* GoogleSignInSwift */; };
 		A0D335562BC742E100FCF019 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335552BC742E100FCF019 /* FirebaseAuth */; };
@@ -102,6 +104,8 @@
 		75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMaganer.swift; sourceTree = "<group>"; };
 		75DCF94E2BC9845E001F93A8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A00232022BBDADE100D5BF20 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A04210302BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsFirebaseManager.swift; sourceTree = "<group>"; };
+		A04210322BD00113007C32E3 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
 		A0D3355F2BC836AE00FCF019 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +167,8 @@
 				29474A372BAFDF2600364FCC /* ProfileScreen.swift */,
 				A00232022BBDADE100D5BF20 /* ProfileViewController.swift */,
 				A0D3355F2BC836AE00FCF019 /* PhotoManager.swift */,
+				A04210302BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift */,
+				A04210322BD00113007C32E3 /* ImageViewUtils.swift */,
 			);
 			path = "Profile Screen";
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 			files = (
 				29474A4E2BBD265600364FCC /* LoginViewController.swift in Sources */,
 				29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */,
+				A04210312BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift in Sources */,
 				A0D335602BC836AE00FCF019 /* PhotoManager.swift in Sources */,
 				29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */,
 				29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */,
@@ -444,6 +451,7 @@
 				29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */,
 				751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */,
 				29474A322BAFB95A00364FCC /* LoginScreen.swift in Sources */,
+				A04210332BD00113007C32E3 /* ImageViewUtils.swift in Sources */,
 				75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */,
 				29BE6F502BCF0330007B6672 /* User.swift in Sources */,
 			);

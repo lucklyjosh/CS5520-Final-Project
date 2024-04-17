@@ -12,6 +12,17 @@ struct Recipe {
         var userName: String?
         var ingredients:String?
         var instructions:String?
+<<<<<<< HEAD
+//        var image: UIImage?
+    
+        
+        init(name: String, ingredients: String,instructions: String /*,image: UIImage*/) {
+            self.name = name
+            self.ingredients = ingredients
+            self.instructions = instructions
+//            self.image = image
+        }
+=======
         var image: String?
         var userId: String?
         var timestamp:Date
@@ -28,5 +39,6 @@ struct Recipe {
 //            self.timestamp = timestamp
 //            
 //        }
+>>>>>>> 5a1124def34c1eda19e6e848d3dc123bf4c6a7b0
     }
 
