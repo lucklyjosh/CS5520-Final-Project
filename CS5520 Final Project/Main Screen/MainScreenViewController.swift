@@ -22,8 +22,6 @@ class MainScreenViewController: UIViewController {
         //MARK: on profileButton tap...
         mainScreen.profileButton.addTarget(self, action: #selector(onButtonProfileTapped), for: .touchUpInside)
         mainScreen.plusButton.addTarget(self, action: #selector(onButtonPlusTapped), for: .touchUpInside)
-        
-
     }
     
     @objc func onButtonProfileTapped(){

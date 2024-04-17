@@ -1,4 +1,5 @@
 {
+  "originHash" : "3bd9f3f635dfde05624f55c4681ff73d9120e665dc5e6e2d218e3ac898de436e",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -57,7 +58,7 @@
     {
       "identity" : "googlesignin-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleSignIn-ios",
+      "location" : "https://github.com/google/GoogleSignIn-iOS",
       "state" : {
         "revision" : "a7965d134c5d3567026c523e0a8a583f73b62b0d",
         "version" : "7.1.0"
@@ -145,5 +146,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

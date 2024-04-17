@@ -9,23 +9,16 @@ import UIKit
 
 class RecipeScreenViewController: UIViewController {
 
+    var recipe: Recipe?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        setupViews()
+    }
 
-        // Do any additional setup after loading the view.
+    func setupViews() {
+        // Add your UI elements here and configure them with 'recipe'
     }
     
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
