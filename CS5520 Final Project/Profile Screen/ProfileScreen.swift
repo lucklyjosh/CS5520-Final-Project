@@ -13,19 +13,8 @@ class ProfileView: UIView {
     var userPosts: UIButton!
     var userLikes: UIButton!
     var profileImageView: UIImageView!
-//    var collectionView: UICollectionView!
-//    var tableViewContacts: UITableView!
     
-    private let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
-    
-    private lazy var homeButton: UIButton = createBarButton(imageSystemName: "house")
-    public lazy var profileButton: UIButton = createBarButton(imageSystemName: "person.crop.circle")
-    public lazy var plusButton: UIButton = createPlusButton()
-    
-    
-    
-    
-    public lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+    var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
         let padding: CGFloat = 15
@@ -38,86 +27,25 @@ class ProfileView: UIView {
         layout.minimumInteritemSpacing = padding
         layout.minimumLineSpacing = padding
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        
-        return layout
-    }()
-    
-    public lazy var collectionViewInProfile: UICollectionView = {
 
-        let collectionViewInProfile: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout)
-        collectionViewInProfile.backgroundColor = .clear
-        collectionViewInProfile.register(ContentCardCell.self, forCellWithReuseIdentifier: ContentCardCell.identifier)
-        collectionViewInProfile.translatesAutoresizingMaskIntoConstraints = false
-        return collectionViewInProfile
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .red
+        collectionView.register(ContentCardCell.self, forCellWithReuseIdentifier: ContentCardCell.identifier)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        
         setupuserName()
         setupbuttonTakePhoto()
         setupprofileImageView()
         setupbuttonuserPosts()
         setupbuttonuserLikes()
-        addSubview(bottomBar)
-        addSubview(collectionViewInProfile)
-        
-        bottomBar.addSubview(homeButton)
-        bottomBar.addSubview(profileButton)
-        bottomBar.addSubview(plusButton)
-
-        addBorderLineToView(bottomBar, atTop: true)
-//<<<<<<< HEAD
-//        collectionViewInProfile.dataSource = self
-        collectionViewInProfile.reloadData()
-//=======
-////        collectionView.dataSource = self
-//        collectionView.reloadData()
-//>>>>>>> 5a1124def34c1eda19e6e848d3dc123bf4c6a7b0
-        
+        addSubview(collectionView)
         initConstraints()
     }
-    
-    private func addBorderLineToView(_ view: UIView, atTop: Bool) {
-        let borderLine = UIView()
-        borderLine.backgroundColor = .lightGray
-        borderLine.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(borderLine)
-
-        NSLayoutConstraint.activate([
-            borderLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            borderLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            borderLine.heightAnchor.constraint(equalToConstant: 2),
-            atTop ? borderLine.topAnchor.constraint(equalTo: view.topAnchor) : borderLine.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
-    private func createPlusButton() -> UIButton {
-        let button = UIButton(type: .custom)
-        button.backgroundColor = .red
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .white
-        button.layer.cornerRadius = 28
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }
-    
-    private func createBarButton(imageSystemName: String) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: imageSystemName), for: .normal)
-        button.tintColor = .gray
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }
-    
-    private lazy var bottomBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     func setupuserName(){
         userName = UILabel()
         userName.text = "Defualt User"
@@ -138,19 +66,15 @@ class ProfileView: UIView {
         self.addSubview(profilePicture)
     }
     
-  
-        func setupprofileImageView(){
-            profileImageView = UIImageView()
-            profileImageView.image = UIImage(systemName: "photo")
-            profileImageView.contentMode = .scaleToFill
-            profileImageView.clipsToBounds = true
-            profileImageView.layer.cornerRadius = 10
-            profileImageView.translatesAutoresizingMaskIntoConstraints = false
-            self.addSubview(profileImageView)
-        }
-
-    
-    
+    func setupprofileImageView(){
+        profileImageView = UIImageView()
+        profileImageView.image = UIImage(systemName: "photo")
+        profileImageView.contentMode = .scaleToFill
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = 10
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(profileImageView)
+    }
     func setupbuttonuserPosts(){
         userPosts = UIButton(type: .system)
         userPosts.setTitle("My Posts", for: .normal)
@@ -188,26 +112,10 @@ class ProfileView: UIView {
             userLikes.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 16),
             userLikes.trailingAnchor.constraint(equalTo: trailingAnchor,constant:-55),
             
-            collectionViewInProfile.topAnchor.constraint(equalTo: userLikes.bottomAnchor, constant: 10),
-            collectionViewInProfile.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionViewInProfile.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionViewInProfile.bottomAnchor.constraint(equalTo: bottomBar.topAnchor, constant: -20),
-            
-            bottomBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomBar.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            bottomBar.heightAnchor.constraint(equalToConstant: 70),
-            
-            homeButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 32),
-            homeButton.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor),
-            
-            profileButton.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -32),
-            profileButton.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor),
-            
-            plusButton.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor),
-            plusButton.centerYAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -30),
-            plusButton.widthAnchor.constraint(equalToConstant: 56),
-            plusButton.heightAnchor.constraint(equalToConstant: 56)
+            collectionView.topAnchor.constraint(equalTo: userLikes.bottomAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+    
         ])
     }
     
@@ -218,21 +126,6 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-
 }
 
-//extension ProfileView: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        items.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
-//            fatalError("Unable to dequeue ContentCardCell")
-//        }
-////        cell.configure(with: items[indexPath.item])
-//        cell.configure(with: recipe)
-//        return cell
-//    }
-//}
+

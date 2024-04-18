@@ -5,38 +5,14 @@
 //  Created by fei li on 4/3/24.
 //
 
-
-
-//class ProfileViewController: UIViewController {
-//    
-//    override func loadView() {
-//        // Setting the ProfileView as the main view of ProfileViewController
-//        view = ProfileView()
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        // Do any additional setup after loading the view.
-//    }
-//    
-//
-//
-//}
-
-//
-//  RegisterViewController.swift
-//  App12
-//
-//  Created by Sakib Miazi on 6/2/23.
-//
-
 import UIKit
 import PhotosUI
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController{
+    
     
     let profileScreen = ProfileView()
     
@@ -48,14 +24,19 @@ class ProfileViewController: UIViewController {
     
     var reciptsList = [Recipe]()
     
+    var recipes = [Recipe]()
+    
     let storage = Storage.storage()
+    
+    //MARK: variable to store the picked Image...
+    var pickedImage:UIImage?
     
 //    var profileImageView: UIImageView!
     
     
     override func loadView() {
-        // Setting the ProfileView as the main view of ProfileViewController
         view = profileScreen
+        profileScreen.collectionView.dataSource = self
     }
     
     
@@ -68,15 +49,8 @@ class ProfileViewController: UIViewController {
                 //MARK: not signed in...
                 self.currentUser = nil
                 self.profileScreen.userName.text = "John Doo"
-                //                self.profileScreen.floatingButtonChatIcon.isEnabled = false
-                //                self.profileScreen.floatingButtonChatIcon.isHidden = true
-                
                 //MARK: Reset tableView...
                 self.reciptsList.removeAll()
-                
-                
-                //MARK: Sign in bar button...
-                //                self.setupRightBarButton(isLoggedin: false)
                 
             }else{
                 //MARK: the user is signed in...
@@ -103,10 +77,8 @@ class ProfileViewController: UIViewController {
                                     if let image = UIImage(data: imageData) {
                                         
                                         DispatchQueue.main.async {
-//                                            self.profileScreen.profilePicture.display(none)
-//                                            profileImageView.image = image
                                         self.profileScreen.profileImageView.image = image
-//
+                                        self.fetchRecipes()
                                         }
                                     } else {
                                         print("Invalid image data")
@@ -124,54 +96,6 @@ class ProfileViewController: UIViewController {
                         // Handle the case where profile image URL is nil
                     }
                 }
-
-
-
-
-                
-
-                
-                
-
-                
-                
-                
-                //                self.profileScreen.floatingButtonChatIcon.isEnabled = true
-                //                self.profileScreen.floatingButtonChatIcon.isHidden = false
-                
-                //MARK: Logout bar button...
-                //                self.setupRightBarButton(isLoggedin: true)
-                
-                
-                //                if let username = user?.displayName{
-                //                    self.getUserEmail(byUsername:username) { email, error in
-                //                        if let error = error {
-                //                            print("Error: \(error.localizedDescription)")
-                //                        } else if let receiveremail = email {
-                //
-                //                            //MARK: Observe Firestore database to display the chat list...
-                //                            self.database.collection("users").document(receiveremail).collection("chats")
-                //                                .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
-                //                                    if let documents = querySnapshot?.documents{
-                //
-                //
-                //                                        self.chatsList.removeAll()
-                //                                        for document in documents{
-                //                                            do{
-                //                                                let chat  = try document.data(as: Recipe.self)
-                //                                                self.chatsList.append(chat)
-                //                                            }catch{
-                //                                                print(error)
-                //                                            }
-                //                                        }
-                //                                        self.mainScreen.tableViewContacts.reloadData()
-                //                                    }
-                //                                })
-                //
-                //                        }
-                //                    }
-                //
-                //                }
                 
             }
         }
@@ -202,58 +126,16 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-
-        
-    
-
-    
-    //MARK: variable to store the picked Image...
-    var pickedImage:UIImage?
-    //codes omitted...
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("in profile view did load---------")
+        print(self.recipes)
         
-
-        //codes omitted...
         profileScreen.profilePicture.menu = getMenuImagePicker()
-        //codes omitted...
-        self.profileScreen.collectionViewInProfile.reloadData()
-//        profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
+        
     }
     
-//fetch data from the fibase store and display
-//    @objc func onButtonUserPostsTapped() {
-//        let messageText = chatScreen.messageInputField.text ?? ""
-//        if let senderEmail = Auth.auth().currentUser?.email, !messageText.isEmpty {
-//            
-//            getUserEmail(byUsername: chatPartnerName!) { email, error in
-//                if let error = error {
-//                    print("Error: \(error.localizedDescription)")
-//                } else if let receiveremail = email {
-//                    print("receiver's email is: \(receiveremail)")
-//                    
-//                    self.checkOrCreateChat(with: receiveremail, senderEmail: senderEmail) { chatID in
-//                               if let chatID = chatID {
-//                                   self.addMessageToChat(chatID: chatID, messageText: messageText, senderEmail: senderEmail)
-//                                   self.updateLastMessage(chatID: chatID, messageText: messageText, receiverEmail: receiveremail, senderEmail: senderEmail)
-//                                   self.messages.removeAll()
-//                                   self.chatScreen.messageInputField.text = ""
-//                                   
-//                               } else {
-//                                   // Handle the case where chatID couldn't be created or retrieved
-//                               }
-//                           }
-//                    
-//                } else {
-//                    print("No user found with that username")
-//                }
-//            }
-//
-//        } else {
-//            // Handle the case where the message is empty or user email is not available
-//        }
-//    }
     
     //MARK: menu for buttonTakePhoto setup...
     func getMenuImagePicker() -> UIMenu{
@@ -290,24 +172,70 @@ class ProfileViewController: UIViewController {
         photoPicker.delegate = self
         present(photoPicker, animated: true, completion: nil)
     }
+    
+    func fetchRecipes() {
+        print("fetching in profile")
+        let db = Firestore.firestore()
+        db.collection("recipes").order(by: "timestamp", descending: true).addSnapshotListener { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
+                    let data = document.data()
+                    let name = data["name"] as? String
+                    let userName = data["userName"] as? String
+                    let ingredients = data["ingredients"] as? String
+                    let instructions = data["instructions"] as? String
+                    let image = data["photoURL"] as? String
+                    let userId = data["userId"] as? String
+                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp)
+                } ?? []
+                print("_____-after fetching")
+                print(self.recipes)
+                self.profileScreen.collectionView.reloadData()
+            }
+        }
+    }
+
     //codes omitted...
 }
 
-//extension UIImageView {
-//    //MARK: Borrowed from: https://www.hackingwithswift.com/example-code/uikit/how-to-load-a-remote-image-url-into-uiimageview
-//    
-//    func loadRemoteImage(from url: URL) {
-//        DispatchQueue.global().async { [weak self] in
-//            if let data = try? Data(contentsOf: url) {
-//                if let image = UIImage(data: data) {
-//                    DispatchQueue.main.async {
-//                        self?.image = image
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+// MARK: - UICollectionViewDataSource
+extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCardCell.identifier, for: indexPath) as? ContentCardCell else {
+            fatalError("Unable to dequeue ContentCardCell")
+        }
+        let recipe = recipes[indexPath.row]
+        cell.configure(with: recipe)
+        cell.delegate = self
+        return cell
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func didTapCell(_ cell: ContentCardCell) {
+        guard let indexPath = profileScreen.collectionView.indexPath(for: cell) else { return }
+        let recipe = recipes[indexPath.row]
+        navigateToDetail(for: recipe)
+    }
+
+    func navigateToDetail(for recipe: Recipe) {
+        let detailVC = RecipeScreenViewController()  // Ensure that this is the correct view controller class name.
+        detailVC.recipe = recipe
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
 
 
 

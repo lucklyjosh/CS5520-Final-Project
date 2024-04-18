@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 //        self.title = "Foodie's Heaven"
 //    }
 
+
     var mainScreen: MainScreen!
     var recipes = [Recipe]()
     
@@ -48,6 +49,8 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
         fetchRecipes()
+        print("---")
+        print(self.recipes)
         mainScreen.collectionView.dataSource = self
 //        mainScreen.collectionView.delegate = self
     }
