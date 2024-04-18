@@ -78,7 +78,8 @@ class ProfileViewController: UIViewController{
                                         
                                         DispatchQueue.main.async {
                                         self.profileScreen.profileImageView.image = image
-                                        self.fetchRecipes()
+//                                        self.fetchRecipes()
+                                        self.fetchUserRecipes()
                                         }
                                     } else {
                                         print("Invalid image data")
@@ -129,8 +130,6 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("in profile view did load---------")
-        print(self.recipes)
         
         profileScreen.profilePicture.menu = getMenuImagePicker()
         
@@ -172,6 +171,77 @@ class ProfileViewController: UIViewController{
         photoPicker.delegate = self
         present(photoPicker, animated: true, completion: nil)
     }
+    
+    func fetchUserRecipes() {
+        print("fetching in profile")
+        let db = Firestore.firestore()
+        let userDocRef = db.collection("users").document(self.currentUser!.uid)
+        
+        userDocRef.addSnapshotListener { [weak self] (documentSnapshot, error) in
+            guard let self = self, let document = documentSnapshot?.data() else {
+                return
+            }
+            
+            if let error = error {
+                print("Error getting document: \(error)")
+            } else {
+                if let posts = document["posts"] as? [String] {
+                    var fetchedRecipes: [Recipe] = [] // Create an array to hold fetched recipes
+
+                    // Dispatch group to handle asynchronous calls
+                    let dispatchGroup = DispatchGroup()
+
+                    for post in posts {
+                        dispatchGroup.enter() // Enter the group before each call
+                        self.getIndividualRecipeData(recipeId: post) { recipe in
+                            if let recipe = recipe {
+                                fetchedRecipes.append(recipe)
+                            }
+                            dispatchGroup.leave() // Leave the group after each call
+                        }
+                    }
+
+                    dispatchGroup.notify(queue: .main) {
+                        // All recipe data fetched, update UI
+                        print("-----after fetching")
+                        print(fetchedRecipes)
+                        self.recipes = fetchedRecipes
+                        self.profileScreen.collectionView.reloadData()
+                    }
+                } else {
+                    self.recipes = [] // No recipes found
+                }
+            }
+        }
+    }
+
+    func getIndividualRecipeData(recipeId: String, completion: @escaping (Recipe?) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("recipes").document(recipeId).getDocument { (document, error) in
+            if let error = error {
+                print("Error getting recipe document: \(error)")
+                completion(nil)
+                return
+            }
+            
+            if let document = document, document.exists {
+                let data = document.data()
+                let name = data?["name"] as? String ?? ""
+                let userName = data?["userName"] as? String ?? ""
+                let ingredients = data?["ingredients"] as? String ?? ""
+                let instructions = data?["instructions"] as? String ?? ""
+                let image = data?["photoURL"] as? String ?? ""
+                let userId = data?["userId"] as? String ?? ""
+                let timestamp = (data?["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                let recipe = Recipe(name: name, userName: userName, ingredients: ingredients, instructions: instructions, image: image, userId: userId, timestamp: timestamp)
+                completion(recipe)
+            } else {
+                print("Recipe document does not exist")
+                completion(nil)
+            }
+        }
+    }
+
     
     func fetchRecipes() {
         print("fetching in profile")
