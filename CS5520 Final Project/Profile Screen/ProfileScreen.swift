@@ -29,7 +29,7 @@ class ProfileView: UIView {
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.register(ContentCardCell.self, forCellWithReuseIdentifier: ContentCardCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -114,7 +114,8 @@ class ProfileView: UIView {
             
             collectionView.topAnchor.constraint(equalTo: userLikes.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
     
         ])
     }
