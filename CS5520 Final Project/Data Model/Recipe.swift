@@ -16,6 +16,7 @@ struct Recipe {
         var userId: String?
         var timestamp:Date
         var recipeId:String?
+        var isFavorited: Bool = false
         
     init(name: String, userName: String,ingredients: String,instructions: String ,image: String, userId: String, timestamp:Date ,recipeId:String ) {
             self.name = name

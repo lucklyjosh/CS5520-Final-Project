@@ -34,6 +34,7 @@
 		29BE6F502BCF0330007B6672 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4F2BCF0330007B6672 /* User.swift */; };
 		29BE6F522BCF980C007B6672 /* ContentCardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */; };
 		29BE6F562BD047FD007B6672 /* RecipeFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F552BD047FD007B6672 /* RecipeFirebaseManager.swift */; };
+		29BE6F5C2BD2F05A007B6672 /* likeButtonContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F5B2BD2F05A007B6672 /* likeButtonContoller.swift */; };
 		751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */; };
 		75DCF94A2BC96687001F93A8 /* PhotoMaganer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */; };
 		75DCF94F2BC9845E001F93A8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DCF94E2BC9845E001F93A8 /* Recipe.swift */; };
@@ -100,6 +101,7 @@
 		29BE6F4F2BCF0330007B6672 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCardCellViewController.swift; sourceTree = "<group>"; };
 		29BE6F552BD047FD007B6672 /* RecipeFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFirebaseManager.swift; sourceTree = "<group>"; };
+		29BE6F5B2BD2F05A007B6672 /* likeButtonContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likeButtonContoller.swift; sourceTree = "<group>"; };
 		751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreenViewController.swift; sourceTree = "<group>"; };
 		75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMaganer.swift; sourceTree = "<group>"; };
 		75DCF94E2BC9845E001F93A8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				298F69962BAFAFAE00CE9FDD /* AppDelegate.swift */,
 				298F69982BAFAFAE00CE9FDD /* SceneDelegate.swift */,
 				298F699A2BAFAFAE00CE9FDD /* ViewController.swift */,
+				29BE6F5B2BD2F05A007B6672 /* likeButtonContoller.swift */,
 				298F699C2BAFAFAE00CE9FDD /* Main.storyboard */,
 				298F699F2BAFAFB100CE9FDD /* Assets.xcassets */,
 				298F69A12BAFAFB100CE9FDD /* LaunchScreen.storyboard */,
@@ -438,6 +441,7 @@
 				29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */,
 				29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */,
 				29474A4A2BBD1D7600364FCC /* MainScreenViewController.swift in Sources */,
+				29BE6F5C2BD2F05A007B6672 /* likeButtonContoller.swift in Sources */,
 				29474A382BAFDF2600364FCC /* ProfileScreen.swift in Sources */,
 				29BE6F562BD047FD007B6672 /* RecipeFirebaseManager.swift in Sources */,
 				298F699B2BAFAFAE00CE9FDD /* ViewController.swift in Sources */,

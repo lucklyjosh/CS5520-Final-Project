@@ -9,6 +9,7 @@ import UIKit
 
 protocol ContentCardCellDelegate: AnyObject {
     func didTapCell(_ cell: ContentCardCell)
+    func didTapLikeButton(on cell: ContentCardCell)
 }
 
 class ContentCardCell: UICollectionViewCell {
@@ -110,8 +111,16 @@ class ContentCardCell: UICollectionViewCell {
         ])
     }
 
+//    @objc func toggleLike() {
+//        likeButton.isSelected = !likeButton.isSelected
+//    }
     @objc func toggleLike() {
         likeButton.isSelected = !likeButton.isSelected
+        delegate?.didTapLikeButton(on: self) 
+    }
+    
+    func setLikeButtonState(_ isFavorited: Bool) {
+        likeButton.isSelected = isFavorited
     }
     
     func configure(with recipe: Recipe) {
