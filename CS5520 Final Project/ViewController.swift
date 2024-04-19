@@ -83,7 +83,9 @@ class ViewController: UIViewController {
                     let image = data["photoURL"] as? String
                     let userId = data["userId"] as? String
                     let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp)
+                    let recipeId = data["recipeId"] as? String
+                    
+                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId: recipeId ?? "")
                 } ?? []
                 self.mainScreen.collectionView.reloadData()
             }

@@ -12,24 +12,12 @@ struct Recipe {
         var userName: String?
         var ingredients:String?
         var instructions:String?
-////<<<<<<< HEAD
-////        var image: UIImage?
-//    
-//        
-//        init(name: String, ingredients: String,instructions: String /*,image: UIImage*/) {
-//            self.name = name
-//            self.ingredients = ingredients
-//            self.instructions = instructions
-////            self.image = image
-//        }
-//=======
         var image: String?
         var userId: String?
         var timestamp:Date
-    
-    
+        var recipeId:String?
         
-    init(name: String, userName: String,ingredients: String,instructions: String ,image: String, userId: String, timestamp:Date  ) {
+    init(name: String, userName: String,ingredients: String,instructions: String ,image: String, userId: String, timestamp:Date ,recipeId:String ) {
             self.name = name
             self.userName = userName
             self.ingredients = ingredients
@@ -37,8 +25,8 @@ struct Recipe {
             self.image = image
             self.userId = userId
             self.timestamp = timestamp
+            self.recipeId = recipeId
             
         }
-//>>>>>>> 5a1124def34c1eda19e6e848d3dc123bf4c6a7b0
     }
 

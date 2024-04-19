@@ -60,7 +60,12 @@ extension AddRecipeScreenViewController{
         let database = Firestore.firestore()
         
         // 创建新的文档引用并添加数据
-        let documentReference = database.collection("recipes").document()
+        
+        let recipeId = UUID().uuidString
+        
+        let documentReference = database.collection("recipes").document(recipeId)
+        
+        
         
         // 使用 setData 来向 Firestore 添加数据
         let newRecipe: [String: Any] = [
@@ -70,7 +75,8 @@ extension AddRecipeScreenViewController{
             "currentUserId" : currentUserId,
             "userName":userName,
             "timestamp": Int64(Date().timeIntervalSince1970 * 1000),
-            "photoURL": photoURL.absoluteString
+            "photoURL": photoURL.absoluteString,
+            "recipeId":recipeId
         ]
         
         documentReference.setData(newRecipe)
