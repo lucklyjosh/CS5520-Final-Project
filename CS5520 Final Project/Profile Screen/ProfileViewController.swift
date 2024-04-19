@@ -233,7 +233,9 @@ class ProfileViewController: UIViewController{
                 let image = data?["photoURL"] as? String ?? ""
                 let userId = data?["userId"] as? String ?? ""
                 let timestamp = (data?["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-                let recipe = Recipe(name: name, userName: userName, ingredients: ingredients, instructions: instructions, image: image, userId: userId, timestamp: timestamp)
+                let recipeId = data?["recipeId"] as? String ?? ""
+                
+                let recipe = Recipe(name: name, userName: userName, ingredients: ingredients, instructions: instructions, image: image, userId: userId, timestamp: timestamp, recipeId: recipeId)
                 completion(recipe)
             } else {
                 print("Recipe document does not exist")
@@ -260,7 +262,8 @@ class ProfileViewController: UIViewController{
                     let image = data["photoURL"] as? String
                     let userId = data["userId"] as? String
                     let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp)
+                    let recipeId = data["recipeId"] as? String
+                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId:recipeId ?? "")
                 } ?? []
                 print("_____-after fetching")
                 print(self.recipes)
