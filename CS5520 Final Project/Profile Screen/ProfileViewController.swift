@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController{
     var reciptsList = [Recipe]()
     
     var recipes = [Recipe]()
+    var likedRecipes = [Recipe]()
     
     let storage = Storage.storage()
     
@@ -132,7 +133,22 @@ class ProfileViewController: UIViewController{
         super.viewDidLoad()
         
         profileScreen.profilePicture.menu = getMenuImagePicker()
+        profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
+        profileScreen.userLikes.addTarget(self, action: #selector(onButtonUserLikesTapped), for: .touchUpInside)
         
+    }
+    
+    @objc func onButtonUserPostsTapped(){
+        print("onButtonUserPostsTapped tapped")
+        self.fetchUserRecipes()
+        
+
+        
+    }
+    @objc func onButtonUserLikesTapped(){
+        print("onButtonUserLikesTapped tapped+++++++++++++++++")
+        self.fetchUserLikes()
+
     }
     
     
@@ -240,6 +256,52 @@ class ProfileViewController: UIViewController{
             } else {
                 print("Recipe document does not exist")
                 completion(nil)
+            }
+        }
+    }
+    
+    func fetchUserLikes() {
+        
+        print("fetching likes in profile")
+        let db = Firestore.firestore()
+        let userDocRef = db.collection("users").document(self.currentUser!.uid)
+        
+        userDocRef.addSnapshotListener { [weak self] (documentSnapshot, error) in
+            guard let self = self, let document = documentSnapshot?.data() else {
+                return
+            }
+            
+            if let error = error {
+                print("Error getting document: \(error)")
+            } else {
+                if let posts = document["favoritePosts"] as? [String] {
+                    print("---------")
+                    print(posts)
+                    var fetchedRecipes: [Recipe] = [] // Create an array to hold fetched recipes
+
+                    // Dispatch group to handle asynchronous calls
+                    let dispatchGroup = DispatchGroup()
+
+                    for post in posts {
+                        dispatchGroup.enter() // Enter the group before each call
+                        self.getIndividualRecipeData(recipeId: post) { recipe in
+                            if let recipe = recipe {
+                                fetchedRecipes.append(recipe)
+                            }
+                            dispatchGroup.leave() // Leave the group after each call
+                        }
+                    }
+
+                    dispatchGroup.notify(queue: .main) {
+                        // All recipe data fetched, update UI
+                        print("-----like after fetching")
+                        print(fetchedRecipes)
+                        self.recipes = fetchedRecipes
+                        self.profileScreen.collectionView.reloadData()
+                    }
+                } else {
+                    self.recipes = [] // No recipes found
+                }
             }
         }
     }
