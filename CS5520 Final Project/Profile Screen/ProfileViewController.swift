@@ -277,6 +277,33 @@ class ProfileViewController: UIViewController{
 
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {
+    
+    func didTapLikeButton(on cell: ContentCardCell) {
+//        guard let indexPath = mainScreen.collectionView.indexPath(for: cell),
+//              let recipeId = recipes[indexPath.row].recipeId else {
+//            print("Error: Could not find index path or recipeId is nil")
+//            return
+//        }
+//        let isCurrentlyFavorited = recipes[indexPath.row].isFavorited
+//
+//           print("Current button state before toggling: \(isCurrentlyFavorited)")
+//
+//           toggleFavoriteStatus(for: recipeId, currentlyFavorited: isCurrentlyFavorited) { success in
+//               DispatchQueue.main.async {
+//                   if success {
+//                       let newFavoritedState = !isCurrentlyFavorited
+//                       cell.likeButton.isSelected = newFavoritedState
+//                       self.recipes[indexPath.row].isFavorited = newFavoritedState
+//                       print("Toggled button state to: \(newFavoritedState)")
+//                   } else {
+//                       // If the operation failed, revert the button state
+//                       cell.likeButton.isSelected = isCurrentlyFavorited
+//                       print("Failed to update the favorite status in Firestore.")
+//                   }
+//            }
+//        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipes.count
     }

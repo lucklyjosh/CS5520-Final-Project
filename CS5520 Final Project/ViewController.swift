@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         print("---")
         print(self.recipes)
         mainScreen.collectionView.dataSource = self
-//        mainScreen.collectionView.delegate = self
+        mainScreen.collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,37 +60,68 @@ class ViewController: UIViewController {
         updateAuthenticationState()
     }
     
-//    func 
-//    delegateOnAddRecipe(recipe:Recipe){
-//        recipes.append(recipe)
-//        print(recipes)
-//        mainScreen.tableViewContacts.reloadData()
-//    }
-    
     func fetchRecipes() {
-        let db = Firestore.firestore()
-        db.collection("recipes").order(by: "timestamp", descending: true).getDocuments { [weak self] (snapshot, error) in
-            guard let self = self else { return }
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
-                    let data = document.data()
-                    let name = data["name"] as? String
-                    let userName = data["userName"] as? String
-                    let ingredients = data["ingredients"] as? String
-                    let instructions = data["instructions"] as? String
-                    let image = data["photoURL"] as? String
-                    let userId = data["userId"] as? String
-                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-                    let recipeId = data["recipeId"] as? String
-                    
-                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId: recipeId ?? "")
-                } ?? []
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User not logged in")
+            return
+        }
+
+        let userRef = Firestore.firestore().collection("users").document(userId)
+        userRef.getDocument { [weak self] (documentSnapshot, error) in
+            guard let document = documentSnapshot, error == nil else {
+                print("Error fetching user favorites: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            let favoritePosts = document.data()?["favoritePosts"] as? [String] ?? []
+
+            Firestore.firestore().collection("recipes").order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
+                guard let self = self, let snapshot = snapshot, error == nil else {
+                    print("Error getting documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                self.recipes = snapshot.documents.compactMap { document -> Recipe? in
+                    var recipe = Recipe(
+                        name: document.data()["name"] as? String ?? "",
+                        userName: document.data()["userName"] as? String ?? "",
+                        ingredients: document.data()["ingredients"] as? String ?? "",
+                        instructions: document.data()["instructions"] as? String ?? "",
+                        image: document.data()["photoURL"] as? String ?? "",
+                        userId: document.data()["userId"] as? String ?? "",
+                        timestamp: (document.data()["timestamp"] as? Timestamp)?.dateValue() ?? Date(),
+                        recipeId: document.documentID
+                    )
+                    recipe.isFavorited = favoritePosts.contains(document.documentID)
+                    return recipe
+                }
                 self.mainScreen.collectionView.reloadData()
             }
         }
     }
+
+//    func fetchRecipes() {
+//        let db = Firestore.firestore()
+//        db.collection("recipes").order(by: "timestamp", descending: true).getDocuments { [weak self] (snapshot, error) in
+//            guard let self = self else { return }
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
+//                    let data = document.data()
+//                    let name = data["name"] as? String
+//                    let userName = data["userName"] as? String
+//                    let ingredients = data["ingredients"] as? String
+//                    let instructions = data["instructions"] as? String
+//                    let image = data["photoURL"] as? String
+//                    let userId = data["userId"] as? String
+//                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+//                    let recipeId = data["recipeId"] as? String
+//                    
+//                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId: recipeId ?? "")
+//                } ?? []
+//                self.mainScreen.collectionView.reloadData()
+//            }
+//        }
+//    }
 
 
 
@@ -164,11 +195,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         let recipe = recipes[indexPath.row]
         cell.configure(with: recipe)
+        let isFavorited = recipe.isFavorited
+        cell.setLikeButtonState(isFavorited)
         cell.delegate = self
         return cell
     }
-
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recipe = recipes[indexPath.row]
         navigateToDetail(for: recipe)
@@ -181,7 +212,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
 
     func navigateToDetail(for recipe: Recipe) {
-        let detailVC = RecipeScreenViewController()  // Ensure that this is the correct view controller class name.
+        let detailVC = RecipeScreenViewController()  
         detailVC.recipe = recipe
         navigationController?.pushViewController(detailVC, animated: true)
     }
