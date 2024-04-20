@@ -126,7 +126,8 @@ class ContentCardCell: UICollectionViewCell {
     func configure(with recipe: Recipe) {
         titleLabel.text = recipe.name ?? "No Name"
         authorLabel.text = recipe.userName ?? "Anonymous"
-
+        likeButton.isSelected = recipe.isFavorited
+        
         if let imageUrl = recipe.image, let url = URL(string: imageUrl) {
             // Use an asynchronous method to download and set the image
             loadImage(from: url)

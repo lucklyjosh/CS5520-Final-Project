@@ -200,6 +200,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.delegate = self
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recipe = recipes[indexPath.row]
         navigateToDetail(for: recipe)
