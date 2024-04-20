@@ -28,6 +28,7 @@ class MainScreenViewController: UIViewController {
         print("profile tapped")
         
         let profileScreen  = ProfileViewController()
+        
         navigationController?.pushViewController(profileScreen, animated: true)
         
     }

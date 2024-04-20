@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController{
     
     let profileScreen = ProfileView()
     
+    let childProgressView = ProgressSpinnerViewController()
+    
     var handleAuth: AuthStateDidChangeListenerHandle?
     
     var currentUser:FirebaseAuth.User?
@@ -44,6 +46,7 @@ class ProfileViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showActivityIndicator()
         
         //MARK: handling if the Authentication state is changed (sign in, sign out, register)...
         handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
@@ -133,6 +136,7 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         profileScreen.profilePicture.menu = getMenuImagePicker()
         profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
         profileScreen.userLikes.addTarget(self, action: #selector(onButtonUserLikesTapped), for: .touchUpInside)
@@ -208,6 +212,7 @@ class ProfileViewController: UIViewController{
     
     func fetchUserRecipes() {
         print("fetching in profile")
+        self.showActivityIndicator()
         let db = Firestore.firestore()
         let userDocRef = db.collection("users").document(self.currentUser!.uid)
         
@@ -245,6 +250,7 @@ class ProfileViewController: UIViewController{
                         print(fetchedRecipes)
                         self.recipes = fetchedRecipes
                         self.profileScreen.collectionView.reloadData()
+                        self.hideActivityIndicator()
                     }
                 } else {
                     self.recipes = [] // No recipes found
@@ -291,6 +297,7 @@ class ProfileViewController: UIViewController{
 
     
     func fetchUserLikes() {
+        self.showActivityIndicator()
         let db = Firestore.firestore()
         let userDocRef = db.collection("users").document(self.currentUser!.uid)
 
@@ -327,6 +334,7 @@ class ProfileViewController: UIViewController{
                 dispatchGroup.notify(queue: .main) {
                     self.recipes = fetchedRecipes
                     self.profileScreen.collectionView.reloadData()
+                    self.hideActivityIndicator()
                 }
             } else {
                 self.recipes = []

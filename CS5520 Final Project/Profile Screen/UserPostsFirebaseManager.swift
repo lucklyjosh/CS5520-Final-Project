@@ -69,7 +69,7 @@ extension ProfileViewController{
             if error != nil{
                 print("Error occured: \(String(describing: error))")
             }else{
-//                self.hideActivityIndicator()
+                self.hideActivityIndicator()
                 self.navigationController?.popViewController(animated: true)
             }
         })

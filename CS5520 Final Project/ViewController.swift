@@ -31,16 +31,20 @@ class ViewController: UIViewController {
 
     var mainScreen: MainScreen!
     var recipes = [Recipe]()
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         mainScreen = MainScreen()
         view = mainScreen
         mainScreen.collectionView.dataSource = self
+       
     }
     
     override func viewDidLoad() {
         print("in view did")
         super.viewDidLoad()
+        
+        
         self.title = "Foodie's Heaven"
         //MARK: on profileButton tap...
         mainScreen.profileButton.addTarget(self, action: #selector(onButtonProfileTapped), for: .touchUpInside)
@@ -48,6 +52,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAuthenticationState), name: NSNotification.Name("UserDidLogin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
+       
         fetchRecipes()
         print("---")
         print(self.recipes)
@@ -56,11 +61,16 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
+        
+        self.showActivityIndicator()
+        
         updateAuthenticationState()
     }
     
     func fetchRecipes() {
+        
         guard let userId = Auth.auth().currentUser?.uid else {
             print("User not logged in")
             return
@@ -94,6 +104,7 @@ class ViewController: UIViewController {
                     return recipe
                 }
                 self.mainScreen.collectionView.reloadData()
+                self.hideActivityIndicator()
             }
         }
     }
@@ -168,8 +179,8 @@ class ViewController: UIViewController {
     }
     
     @objc func onButtonProfileTapped(){
-        print("profile tapped")
-        
+        print("profile tapped in view controller----------------")
+//        self.showActivityIndicator()
         let profileScreen  = ProfileViewController()
         navigationController?.pushViewController(profileScreen, animated: true)
         
