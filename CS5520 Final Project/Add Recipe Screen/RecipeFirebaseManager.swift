@@ -87,6 +87,7 @@ extension AddRecipeScreenViewController{
             } else {
                 // 打印文档的ID，确认添加成功
                 print("Document added with ID: \(documentReference.documentID)")
+                self.hideActivityIndicator()
                                 self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
                 // 异步返回上一个视图控制器
 //                DispatchQueue.main.async {
@@ -108,7 +109,9 @@ extension AddRecipeScreenViewController{
             } else {
                 print("User posts updated with new recipe ID: \(recipeId)")
                 DispatchQueue.main.async {
+                    
                     self.navigationController?.popViewController(animated: true)
+                    
                 }
             }
         }

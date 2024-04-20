@@ -26,7 +26,7 @@ class AddRecipeScreenViewController: UIViewController{
     
     let addRecipeScreen = AddRecipeScreen()
     let storage = Storage.storage()
-    
+    let childProgressView = ProgressSpinnerViewController()
     
     //MARK: delegate to ViewController when getting back...
     var delegate:ViewController!
@@ -102,6 +102,7 @@ class AddRecipeScreenViewController: UIViewController{
     
     //MARK: submit button tapped action...
     @objc func onSaveButtonTapped(){
+        self.showActivityIndicator()
         
         // Check if email is valid
         if let name = addRecipeScreen.recipeNameTextField.text,!name.isEmpty {

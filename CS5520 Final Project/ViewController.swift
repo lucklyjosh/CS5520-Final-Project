@@ -44,7 +44,6 @@ class ViewController: UIViewController {
         print("in view did")
         super.viewDidLoad()
         
-        
         self.title = "Foodie's Heaven"
         //MARK: on profileButton tap...
         mainScreen.profileButton.addTarget(self, action: #selector(onButtonProfileTapped), for: .touchUpInside)
@@ -63,13 +62,14 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
-        self.showActivityIndicator()
+//        self.showActivityIndicator()
+//
         
         updateAuthenticationState()
     }
     
     func fetchRecipes() {
+        self.showActivityIndicator()
         
         guard let userId = Auth.auth().currentUser?.uid else {
             print("User not logged in")
@@ -181,6 +181,7 @@ class ViewController: UIViewController {
     @objc func onButtonProfileTapped(){
         print("profile tapped in view controller----------------")
 //        self.showActivityIndicator()
+//        self.hideActivityIndicator()
         let profileScreen  = ProfileViewController()
         navigationController?.pushViewController(profileScreen, animated: true)
         

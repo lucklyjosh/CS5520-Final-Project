@@ -44,6 +44,7 @@
 		A04210402BD410B5007C32E3 /* ProgressSpinnerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042103F2BD410B5007C32E3 /* ProgressSpinnerDelegate.swift */; };
 		A04210422BD410F5007C32E3 /* ProfileProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04210412BD410F5007C32E3 /* ProfileProgressIndicatorManager.swift */; };
 		A04210442BD4163A007C32E3 /* MainScreenProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04210432BD4163A007C32E3 /* MainScreenProgressIndicatorManager.swift */; };
+		A04210462BD4262C007C32E3 /* RecipeProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04210452BD4262C007C32E3 /* RecipeProgressIndicatorManager.swift */; };
 		A0D335512BC7424A00FCF019 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335502BC7424A00FCF019 /* GoogleSignIn */; };
 		A0D335532BC7424A00FCF019 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335522BC7424A00FCF019 /* GoogleSignInSwift */; };
 		A0D335562BC742E100FCF019 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A0D335552BC742E100FCF019 /* FirebaseAuth */; };
@@ -114,6 +115,7 @@
 		A042103F2BD410B5007C32E3 /* ProgressSpinnerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerDelegate.swift; sourceTree = "<group>"; };
 		A04210412BD410F5007C32E3 /* ProfileProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProgressIndicatorManager.swift; sourceTree = "<group>"; };
 		A04210432BD4163A007C32E3 /* MainScreenProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenProgressIndicatorManager.swift; sourceTree = "<group>"; };
+		A04210452BD4262C007C32E3 /* RecipeProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeProgressIndicatorManager.swift; sourceTree = "<group>"; };
 		A0D3355F2BC836AE00FCF019 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 			children = (
 				29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */,
 				29BE6F472BC6F6C7007B6672 /* AddRecipeScreenViewController.swift */,
+				A04210452BD4262C007C32E3 /* RecipeProgressIndicatorManager.swift */,
 				75DCF9492BC96687001F93A8 /* PhotoMaganer.swift */,
 				29BE6F552BD047FD007B6672 /* RecipeFirebaseManager.swift */,
 			);
@@ -451,6 +454,7 @@
 				29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */,
 				A04210312BCFE4C6007C32E3 /* UserPostsFirebaseManager.swift in Sources */,
 				A04210422BD410F5007C32E3 /* ProfileProgressIndicatorManager.swift in Sources */,
+				A04210462BD4262C007C32E3 /* RecipeProgressIndicatorManager.swift in Sources */,
 				A0D335602BC836AE00FCF019 /* PhotoManager.swift in Sources */,
 				29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */,
 				29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */,
