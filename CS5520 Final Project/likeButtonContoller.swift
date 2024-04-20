@@ -55,6 +55,7 @@ extension ViewController{
                 if let index = self.recipes.firstIndex(where: { $0.recipeId == recipeId }) {
                     self.recipes[index].isFavorited = !currentlyFavorited
                 }
+                NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil, userInfo: ["recipeId": recipeId, "newStatus": !currentlyFavorited])
                 completion(true)
             }
         }
