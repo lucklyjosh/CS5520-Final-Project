@@ -110,8 +110,9 @@ class AddRecipeScreenViewController: UIViewController{
             showErrorAlert(message: "instruciotns field cannot be empty.")
         }
             //MARK: creating a new user on Firebase with photo...
-//            showActivityIndicator()
+//
             uploadRecipePhotoToStorage()
+//        self.hideActivityIndicator()
     }
 }
         

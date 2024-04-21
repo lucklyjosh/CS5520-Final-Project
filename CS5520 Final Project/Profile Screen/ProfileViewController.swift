@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showActivityIndicator()
+//        self.showActivityIndicator()
         
         //MARK: handling if the Authentication state is changed (sign in, sign out, register)...
         handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
@@ -67,10 +67,12 @@ class ProfileViewController: UIViewController{
                     // No user is currently logged in
                     print("No user is currently logged in.")
                 }
-
-                let db = Firestore.firestore()
                 
-                let docRef = db.collection("users").document(self.currentUser!.uid)
+                let db = Firestore.firestore()
+                if let currentUser = Auth.auth().currentUser {
+                    let userID = currentUser.uid
+                    let docRef = db.collection("users").document(self.currentUser!.uid)
+                
                 self.fetchData(docRef: docRef) { profileImageUrl in
                     if let profileImageUrlString = profileImageUrl {
                         // Convert the string URL to a URL object
@@ -80,8 +82,8 @@ class ProfileViewController: UIViewController{
                                     if let image = UIImage(data: imageData) {
                                         
                                         DispatchQueue.main.async {
-                                        self.profileScreen.profileImageView.image = image
-                                        self.fetchUserRecipes()
+                                            self.profileScreen.profileImageView.image = image
+                                            
                                         }
                                     } else {
                                         print("Invalid image data")
@@ -99,7 +101,7 @@ class ProfileViewController: UIViewController{
                         // Handle the case where profile image URL is nil
                     }
                 }
-                
+            }
             }
         }
     }
@@ -138,10 +140,11 @@ class ProfileViewController: UIViewController{
         profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
         profileScreen.userLikes.addTarget(self, action: #selector(onButtonUserLikesTapped), for: .touchUpInside)
         
-        fetchRecipes()
+       
         profileScreen.collectionView.dataSource = self
         profileScreen.collectionView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleFavoriteStatusChange(notification:)), name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
+        onButtonUserPostsTapped()
        }
     
     @objc func handleFavoriteStatusChange(notification: Notification) {
@@ -160,9 +163,6 @@ class ProfileViewController: UIViewController{
     @objc func onButtonUserPostsTapped(){
         print("onButtonUserPostsTapped tapped")
         self.fetchUserRecipes()
-        
-
-        
     }
     @objc func onButtonUserLikesTapped(){
         print("onButtonUserLikesTapped tapped+++++++++++++++++")
@@ -211,49 +211,54 @@ class ProfileViewController: UIViewController{
         print("fetching in profile")
         self.showActivityIndicator()
         let db = Firestore.firestore()
-        let userDocRef = db.collection("users").document(self.currentUser!.uid)
-        
-        userDocRef.addSnapshotListener { [weak self] (documentSnapshot, error) in
-            guard let self = self, let document = documentSnapshot?.data() else {
-                return
-            }
+        if let currentUser = Auth.auth().currentUser {
+            let userID = currentUser.uid
+            let userDocRef = db.collection("users").document(userID)
             
-            if let error = error {
-                print("Error getting document: \(error)")
-            } else {
-                if let posts = document["posts"] as? [String] {
-                    
-                    let favoritePosts = document["favoritePosts"] as? [String] ?? []
-                    let userPosts = document["posts"] as? [String] ?? []
-                    
-                    var fetchedRecipes: [Recipe] = [] // Create an array to hold fetched recipes
-
-                    // Dispatch group to handle asynchronous calls
-                    let dispatchGroup = DispatchGroup()
-
-                    for post in posts {
-                        dispatchGroup.enter() // Enter the group before each call
-                        self.getIndividualRecipeData(recipeId: post, favoritePosts: favoritePosts) { recipe in
-                            if let recipe = recipe {
-                                fetchedRecipes.append(recipe)
-                            }
-                            dispatchGroup.leave() // Leave the group after each call
-                        }
-                    }
-
-                    dispatchGroup.notify(queue: .main) {
-                        // All recipe data fetched, update UI
-                        print("-----after fetching")
-                        print(fetchedRecipes)
-                        self.recipes = fetchedRecipes
-                        self.profileScreen.collectionView.reloadData()
-                        self.hideActivityIndicator()
-                    }
+            userDocRef.addSnapshotListener { [weak self] (documentSnapshot, error) in
+                guard let self = self, let document = documentSnapshot?.data() else {
+                    return
+                }
+                
+                if let error = error {
+                    print("Error getting document: \(error)")
                 } else {
-                    self.recipes = [] // No recipes found
+                    if let posts = document["posts"] as? [String] {
+                        
+                        let favoritePosts = document["favoritePosts"] as? [String] ?? []
+                        let userPosts = document["posts"] as? [String] ?? []
+                        
+                        var fetchedRecipes: [Recipe] = [] // Create an array to hold fetched recipes
+                        
+                        // Dispatch group to handle asynchronous calls
+                        let dispatchGroup = DispatchGroup()
+                        
+                        for post in posts {
+                            dispatchGroup.enter() // Enter the group before each call
+                            self.getIndividualRecipeData(recipeId: post, favoritePosts: favoritePosts) { recipe in
+                                if let recipe = recipe {
+                                    fetchedRecipes.append(recipe)
+                                }
+                                dispatchGroup.leave() // Leave the group after each call
+                            }
+                        }
+                        
+                        dispatchGroup.notify(queue: .main) {
+                            // All recipe data fetched, update UI
+                            print("-----after fetching")
+                            print(fetchedRecipes)
+                            self.recipes = fetchedRecipes
+                            self.profileScreen.collectionView.reloadData()
+                            self.hideActivityIndicator()
+                        }
+                    } else {
+                        self.recipes = [] // No recipes found
+                    }
                 }
             }
+            
         }
+        
     }
 
     func getIndividualRecipeData(recipeId: String, favoritePosts: [String], completion: @escaping (Recipe?) -> Void) {
