@@ -38,13 +38,13 @@ class ProfileViewController: UIViewController{
     override func loadView() {
         view = profileScreen
         profileScreen.collectionView.dataSource = self
-
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.showActivityIndicator()
+        //        self.showActivityIndicator()
         
         //MARK: handling if the Authentication state is changed (sign in, sign out, register)...
         handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
@@ -72,36 +72,36 @@ class ProfileViewController: UIViewController{
                 if let currentUser = Auth.auth().currentUser {
                     let userID = currentUser.uid
                     let docRef = db.collection("users").document(self.currentUser!.uid)
-                
-                self.fetchData(docRef: docRef) { profileImageUrl in
-                    if let profileImageUrlString = profileImageUrl {
-                        // Convert the string URL to a URL object
-                        if let url = URL(string: profileImageUrlString) {
-                            DispatchQueue.global().async {
-                                if let imageData = try? Data(contentsOf: url) {
-                                    if let image = UIImage(data: imageData) {
-                                        
-                                        DispatchQueue.main.async {
-                                            self.profileScreen.profileImageView.image = image
+                    
+                    self.fetchData(docRef: docRef) { profileImageUrl in
+                        if let profileImageUrlString = profileImageUrl {
+                            // Convert the string URL to a URL object
+                            if let url = URL(string: profileImageUrlString) {
+                                DispatchQueue.global().async {
+                                    if let imageData = try? Data(contentsOf: url) {
+                                        if let image = UIImage(data: imageData) {
                                             
+                                            DispatchQueue.main.async {
+                                                self.profileScreen.profileImageView.image = image
+                                                
+                                            }
+                                        } else {
+                                            print("Invalid image data")
                                         }
                                     } else {
-                                        print("Invalid image data")
+                                        print("Failed to load image data from URL")
                                     }
-                                } else {
-                                    print("Failed to load image data from URL")
                                 }
+                            } else {
+                                print("Invalid profile image URL")
+                                // Handle the case where the profile image URL string is invalid
                             }
                         } else {
-                            print("Invalid profile image URL")
-                            // Handle the case where the profile image URL string is invalid
+                            print("Profile image URL not available")
+                            // Handle the case where profile image URL is nil
                         }
-                    } else {
-                        print("Profile image URL not available")
-                        // Handle the case where profile image URL is nil
                     }
                 }
-            }
             }
         }
     }
@@ -140,18 +140,18 @@ class ProfileViewController: UIViewController{
         profileScreen.userPosts.addTarget(self, action: #selector(onButtonUserPostsTapped), for: .touchUpInside)
         profileScreen.userLikes.addTarget(self, action: #selector(onButtonUserLikesTapped), for: .touchUpInside)
         
-       
+        
         profileScreen.collectionView.dataSource = self
         profileScreen.collectionView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleFavoriteStatusChange(notification:)), name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
         onButtonUserPostsTapped()
-       }
+    }
     
     @objc func handleFavoriteStatusChange(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let recipeId = userInfo["recipeId"] as? String,
               let newStatus = userInfo["newStatus"] as? Bool else { return }
-
+        
         if let index = recipes.firstIndex(where: { $0.recipeId == recipeId }) {
             recipes[index].isFavorited = newStatus
             DispatchQueue.main.async {
@@ -167,7 +167,7 @@ class ProfileViewController: UIViewController{
     @objc func onButtonUserLikesTapped(){
         print("onButtonUserLikesTapped tapped+++++++++++++++++")
         self.fetchUserLikes()
-
+        
     }
     
     
@@ -253,7 +253,7 @@ class ProfileViewController: UIViewController{
             
         }
     }
-
+    
     func getIndividualRecipeData(recipeId: String, favoritePosts: [String], completion: @escaping (Recipe?) -> Void) {
         if recipeId.isEmpty {
             print("Received empty recipeId, aborting fetch.")
@@ -289,32 +289,32 @@ class ProfileViewController: UIViewController{
             }
         }
     }
-
+    
     
     func fetchUserLikes() {
         self.showActivityIndicator()
         let db = Firestore.firestore()
         let userDocRef = db.collection("users").document(self.currentUser!.uid)
-
+        
         userDocRef.getDocument { [weak self] (documentSnapshot, error) in
             guard let self = self, let document = documentSnapshot?.data() else {
                 return
             }
-
+            
             if let error = error {
                 print("Error getting document: \(error)")
                 return
             }
-
+            
             if let posts = document["favoritePosts"] as? [String] {
                 
                 let favoritePosts = document["favoritePosts"] as? [String] ?? []
                 let userPosts = document["posts"] as? [String] ?? []
                 
                 var fetchedRecipes: [Recipe] = []
-
+                
                 let dispatchGroup = DispatchGroup()
-
+                
                 for post in posts {
                     dispatchGroup.enter()
                     self.getIndividualRecipeData(recipeId: post, favoritePosts: favoritePosts) { recipe in
@@ -325,7 +325,7 @@ class ProfileViewController: UIViewController{
                         dispatchGroup.leave()
                     }
                 }
-
+                
                 dispatchGroup.notify(queue: .main) {
                     self.recipes = fetchedRecipes
                     self.profileScreen.collectionView.reloadData()
@@ -336,7 +336,7 @@ class ProfileViewController: UIViewController{
             }
         }
     }
-
+}
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {
     
