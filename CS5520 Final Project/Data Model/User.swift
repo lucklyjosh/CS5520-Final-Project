@@ -1,4 +1,3 @@
-//
 //  User.swift
 //  CS5520 Final Project
 //

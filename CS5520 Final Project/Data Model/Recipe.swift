@@ -27,7 +27,6 @@ struct Recipe {
             self.userId = userId
             self.timestamp = timestamp
             self.recipeId = recipeId
-            
         }
     }
 

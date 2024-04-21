@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
     var loginView: LoginScreen!
     
     override func loadView() {
-//        view = LoginScreen()
         loginView = LoginScreen()
         view = loginView
     }
@@ -61,7 +60,6 @@ class LoginViewController: UIViewController {
                 self.showErrorAlert(message: error.localizedDescription)
             } else {
                 // Successful login
-//                self.updateAuthenticationState()
                 NotificationCenter.default.post(name: NSNotification.Name("UserDidLogin"), object: nil)
 
                 self.closeScreen()

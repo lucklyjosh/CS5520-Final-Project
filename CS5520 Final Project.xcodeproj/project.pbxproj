@@ -31,7 +31,6 @@
 		29BE6F4A2BC7AD65007B6672 /* ProgressSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */; };
 		29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */; };
 		29BE6F502BCF0330007B6672 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F4F2BCF0330007B6672 /* User.swift */; };
-		29BE6F522BCF980C007B6672 /* ContentCardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */; };
 		29BE6F562BD047FD007B6672 /* RecipeFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F552BD047FD007B6672 /* RecipeFirebaseManager.swift */; };
 		29BE6F5C2BD2F05A007B6672 /* likeButtonContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BE6F5B2BD2F05A007B6672 /* likeButtonContoller.swift */; };
 		751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */; };
@@ -101,7 +100,6 @@
 		29BE6F492BC7AD65007B6672 /* ProgressSpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerViewController.swift; sourceTree = "<group>"; };
 		29BE6F4B2BC7B146007B6672 /* LoginWithGoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithGoogleViewController.swift; sourceTree = "<group>"; };
 		29BE6F4F2BCF0330007B6672 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCardCellViewController.swift; sourceTree = "<group>"; };
 		29BE6F552BD047FD007B6672 /* RecipeFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFirebaseManager.swift; sourceTree = "<group>"; };
 		29BE6F5B2BD2F05A007B6672 /* likeButtonContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likeButtonContoller.swift; sourceTree = "<group>"; };
 		751CCC9D2BC8B58E0087C76F /* RecipeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreenViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 			children = (
 				29474A432BAFDFF800364FCC /* MainScreen.swift */,
 				29474A472BBD060A00364FCC /* ContentCardCell.swift */,
-				29BE6F512BCF980C007B6672 /* ContentCardCellViewController.swift */,
 				29474A492BBD1D7600364FCC /* MainScreenViewController.swift */,
 			);
 			path = "Main Screen";
@@ -461,7 +458,6 @@
 				298F69992BAFAFAE00CE9FDD /* SceneDelegate.swift in Sources */,
 				A00232032BBDADE100D5BF20 /* ProfileViewController.swift in Sources */,
 				29474A4C2BBD264400364FCC /* SignUpViewController.swift in Sources */,
-				29BE6F522BCF980C007B6672 /* ContentCardCellViewController.swift in Sources */,
 				29BE6F482BC6F6C7007B6672 /* AddRecipeScreenViewController.swift in Sources */,
 				751CCC9E2BC8B58E0087C76F /* RecipeScreenViewController.swift in Sources */,
 				A04210402BD410B5007C32E3 /* ProgressSpinnerDelegate.swift in Sources */,

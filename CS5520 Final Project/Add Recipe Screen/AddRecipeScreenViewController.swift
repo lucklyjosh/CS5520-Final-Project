@@ -26,8 +26,6 @@ class AddRecipeScreenViewController: UIViewController{
         view = addRecipeScreen
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,9 +108,8 @@ class AddRecipeScreenViewController: UIViewController{
             showErrorAlert(message: "instruciotns field cannot be empty.")
         }
             //MARK: creating a new user on Firebase with photo...
-//
             uploadRecipePhotoToStorage()
-//        self.hideActivityIndicator()
+
     }
 }
         

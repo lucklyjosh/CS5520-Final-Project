@@ -95,6 +95,7 @@ extension AddRecipeScreenViewController{
                 print("Error updating user posts: \(error.localizedDescription)")
             } else {
                 print("User posts updated with new recipe ID: \(recipeId)")
+                NotificationCenter.default.post(name: Notification.Name("RecipeUpdated"), object: nil)
                 DispatchQueue.main.async {
                     
                     self.navigationController?.popViewController(animated: true)

@@ -33,7 +33,6 @@ extension ProfileViewController{
                 })
             }
         }else{
-//            registerUser(photoURL: profilePhotoURL)
         }
     }
     
@@ -59,10 +58,7 @@ extension ProfileViewController{
     
     func setNameAndPhotoOfTheUserInFirebaseAuth(photoURL: URL?){
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-//        changeRequest?.displayName = name
         changeRequest?.photoURL = photoURL
-        
-        print("\(photoURL)")
         changeRequest?.commitChanges(completion: {(error) in
             if error != nil{
                 print("Error occured: \(String(describing: error))")

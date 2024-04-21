@@ -214,12 +214,10 @@ class ProfileViewController: UIViewController{
         if let currentUser = Auth.auth().currentUser {
             let userID = currentUser.uid
             let userDocRef = db.collection("users").document(userID)
-            
             userDocRef.addSnapshotListener { [weak self] (documentSnapshot, error) in
                 guard let self = self, let document = documentSnapshot?.data() else {
                     return
                 }
-                
                 if let error = error {
                     print("Error getting document: \(error)")
                 } else {
@@ -227,12 +225,9 @@ class ProfileViewController: UIViewController{
                         
                         let favoritePosts = document["favoritePosts"] as? [String] ?? []
                         let userPosts = document["posts"] as? [String] ?? []
-                        
                         var fetchedRecipes: [Recipe] = [] // Create an array to hold fetched recipes
-                        
                         // Dispatch group to handle asynchronous calls
                         let dispatchGroup = DispatchGroup()
-                        
                         for post in posts {
                             dispatchGroup.enter() // Enter the group before each call
                             self.getIndividualRecipeData(recipeId: post, favoritePosts: favoritePosts) { recipe in
@@ -242,7 +237,6 @@ class ProfileViewController: UIViewController{
                                 dispatchGroup.leave() // Leave the group after each call
                             }
                         }
-                        
                         dispatchGroup.notify(queue: .main) {
                             // All recipe data fetched, update UI
                             print("-----after fetching")
@@ -258,7 +252,6 @@ class ProfileViewController: UIViewController{
             }
             
         }
-        
     }
 
     func getIndividualRecipeData(recipeId: String, favoritePosts: [String], completion: @escaping (Recipe?) -> Void) {
@@ -343,46 +336,6 @@ class ProfileViewController: UIViewController{
             }
         }
     }
-
-
-    func fetchRecipes() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("User not logged in")
-            return
-        }
-
-        let userRef = Firestore.firestore().collection("users").document(userId)
-        userRef.getDocument { [weak self] (documentSnapshot, error) in
-            guard let document = documentSnapshot, error == nil else {
-                print("Error fetching user favorites: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            let favoritePosts = document.data()?["favoritePosts"] as? [String] ?? []
-
-            Firestore.firestore().collection("recipes").order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
-                guard let self = self, let snapshot = snapshot, error == nil else {
-                    print("Error getting documents: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
-                self.recipes = snapshot.documents.compactMap { document -> Recipe? in
-                    var recipe = Recipe(
-                        name: document.data()["name"] as? String ?? "",
-                        userName: document.data()["userName"] as? String ?? "",
-                        ingredients: document.data()["ingredients"] as? String ?? "",
-                        instructions: document.data()["instructions"] as? String ?? "",
-                        image: document.data()["photoURL"] as? String ?? "",
-                        userId: document.data()["userId"] as? String ?? "",
-                        timestamp: (document.data()["timestamp"] as? Timestamp)?.dateValue() ?? Date(),
-                        recipeId: document.documentID
-                    )
-                    recipe.isFavorited = favoritePosts.contains(document.documentID)
-                    return recipe
-                }
-                self.profileScreen.collectionView.reloadData()
-            }
-        }
-    }
-}
 
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate, ContentCardCellDelegate {

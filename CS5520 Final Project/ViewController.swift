@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var mainScreen: MainScreen!
     var recipes = [Recipe]()
     let childProgressView = ProgressSpinnerViewController()
+    var recipesListener: ListenerRegistration?
     
     override func loadView() {
         mainScreen = MainScreen()
@@ -34,10 +35,9 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAuthenticationState), name: NSNotification.Name("UserDidLogin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
-       
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchRecipes), name: Notification.Name("RecipeUpdated"), object: nil)
+
         fetchRecipes()
-        print("---")
-        print(self.recipes)
         mainScreen.collectionView.dataSource = self
         mainScreen.collectionView.delegate = self
     }
@@ -45,13 +45,11 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-//        self.showActivityIndicator()
-//
-        
+
         updateAuthenticationState()
     }
     
-    func fetchRecipes() {
+    @objc func fetchRecipes() {
         self.showActivityIndicator()
         
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -91,6 +89,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     
     @objc func updateAuthenticationState() {
         print("Update called")

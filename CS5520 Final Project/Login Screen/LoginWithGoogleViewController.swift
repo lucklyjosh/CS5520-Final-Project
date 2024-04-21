@@ -45,10 +45,33 @@ extension LoginViewController{
                     print("Firebase Sign-In error: \(error.localizedDescription)")
                     return
                 }
+                if let authUser = authResult?.user {
+                    self.updateFirestoreWithUserData(user: authUser)
+                }
                 // Navigate to the main screen
                 self.closeScreen()
             }
             
+        }
+    }
+    
+    func updateFirestoreWithUserData(user: Firebase.User) {
+        let db = Firestore.firestore()
+        let usersRef = db.collection("users")
+        
+        let userData = [
+            "uid": user.uid,
+            "name": user.displayName ?? "",
+            "email": user.email ?? "",
+            "profileImageUrl": user.photoURL?.absoluteString ?? ""
+        ]
+
+        usersRef.document(user.uid).setData(userData, merge: true) { error in
+            if let error = error {
+                print("Error updating Firestore with user data: \(error.localizedDescription)")
+            } else {
+                print("User data successfully updated/added in Firestore")
+            }
         }
     }
 }
