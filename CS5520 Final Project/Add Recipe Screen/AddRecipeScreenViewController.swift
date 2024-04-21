@@ -10,20 +10,7 @@ import PhotosUI
 import FirebaseStorage
 
 class AddRecipeScreenViewController: UIViewController{
-    
-    //
-    //    override func loadView() {
-    //        // Setting the ProfileView as the main view of ProfileViewController
-    //        view = AddRecipeScreen()
-    //    }
-    //
-    //    override func viewDidLoad() {
-    //        super.viewDidLoad()
-    //        // Do any additional setup after loading the view.
-    //    }
-    
-    
-    
+
     let addRecipeScreen = AddRecipeScreen()
     let storage = Storage.storage()
     
@@ -127,25 +114,4 @@ class AddRecipeScreenViewController: UIViewController{
             uploadRecipePhotoToStorage()
     }
 }
-        
-        //        if let name = addRecipeScreen.recipeNameTextField.text,
-        //           let ingredients = addRecipeScreen.ingredientsTextField.text,
-        //           let instructions = addRecipeScreen.instructionsTextField.text,
-        //           let image = addRecipeScreen.picture.imageView{
-        //
-        //                        // All fields have values
-        //                        let newRecipe = Recipe(name: name,
-        //                                              ingredients: ingredients,
-        //                                                 instructions: instructions,
-        //                                              image: pickedImage ?? (UIImage(systemName: "photo"))!
-        //                        )
-        //                        delegate.delegateOnAddRecipe(recipe: newRecipe)
-        //
-        //                    let detailScreenViewController = DetailScreenViewController()
-        //                    detailScreenViewController.receivedPackage = newContact
-        //                    navigationController?.popViewController(animated: true)
-        //                } else {
-        //                    // Some fields are empty
-        //                }
-        //
-        //            }
+

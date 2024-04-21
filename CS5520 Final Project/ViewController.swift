@@ -48,6 +48,8 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAuthenticationState), name: NSNotification.Name("UserDidLogin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoginScreen), name: NSNotification.Name("ShowLoginScreen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSignUpScreen), name: NSNotification.Name("ShowSignUpScreen"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchRecipes), name: Notification.Name("RecipeUpdated"), object: nil)
+
         fetchRecipes()
         print("---")
         print(self.recipes)
@@ -60,7 +62,7 @@ class ViewController: UIViewController {
         updateAuthenticationState()
     }
     
-    func fetchRecipes() {
+    @objc func fetchRecipes() {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("User not logged in")
             return
