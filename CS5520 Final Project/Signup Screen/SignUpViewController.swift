@@ -135,22 +135,4 @@ class SignUpViewController: UIViewController {
             }
         }
     }
-    
-//    func saveUserDetailsToFirestore(user: [String: Any]) {
-//        guard let email = user["email"] as? String else { return }
-//        print("Saving user details to Firestore")
-//        
-//        let database = Firestore.firestore()
-//        database.collection("users").document(email).setData(user) { [weak self] error in
-//            guard let self = self else { return }
-//            
-//            if error == nil {
-//                print("Saving user to Firestore succeeded!")
-//                // Success handling...
-//            } else {
-//                // Error handling...
-//                print("Error saving user to Firestore: \(String(describing: error))")
-//            }
-//        }
-//    }
 }

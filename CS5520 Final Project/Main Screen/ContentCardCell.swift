@@ -111,9 +111,6 @@ class ContentCardCell: UICollectionViewCell {
         ])
     }
 
-//    @objc func toggleLike() {
-//        likeButton.isSelected = !likeButton.isSelected
-//    }
     @objc func toggleLike() {
         likeButton.isSelected = !likeButton.isSelected
         delegate?.didTapLikeButton(on: self) 

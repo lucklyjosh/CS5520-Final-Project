@@ -120,8 +120,6 @@ class ProfileView: UIView {
         ])
     }
     
-   
-    
     //MARK: unused functions...
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

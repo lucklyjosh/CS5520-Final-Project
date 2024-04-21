@@ -41,7 +41,7 @@ extension AddRecipeScreenViewController{
     }
     
     func saveTheRecipe(photoURL: URL?){
-        // 从视图中获取配方的各个部分
+
         guard let name = addRecipeScreen.recipeNameTextField.text,
               let ingredients = addRecipeScreen.ingredientsTextField.text,
               let instructions = addRecipeScreen.instructionsTextField.text,
@@ -55,19 +55,12 @@ extension AddRecipeScreenViewController{
         
         let userName = currentUser.displayName ?? "Unknown User"
         
-        
-        // 获取对 Firestore 数据库的引用
         let database = Firestore.firestore()
-        
-        // 创建新的文档引用并添加数据
         
         let recipeId = UUID().uuidString
         
         let documentReference = database.collection("recipes").document(recipeId)
-        
-        
-        
-        // 使用 setData 来向 Firestore 添加数据
+
         let newRecipe: [String: Any] = [
             "name": name,
             "ingredients": ingredients,
@@ -82,25 +75,19 @@ extension AddRecipeScreenViewController{
         documentReference.setData(newRecipe)
         { error in
             if let error = error {
-                // 处理错误情况
+           
                 print("Error adding document: \(error.localizedDescription)")
             } else {
-                // 打印文档的ID，确认添加成功
+              
                 print("Document added with ID: \(documentReference.documentID)")
                 self.hideActivityIndicator()
-                                self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
-                // 异步返回上一个视图控制器
-//                DispatchQueue.main.async {
-//                    self.navigationController?.popViewController(animated: true)
-//                }
+                self.updateUserPosts(with: documentReference.documentID, forUser: currentUserId)
             }
         }
     }
 
-    /// 更新用户的 posts 数组，添加新的配方 ID
     func updateUserPosts(with recipeId: String, forUser userId: String) {
         let userRef = Firestore.firestore().collection("users").document(userId)
-        // 使用 FieldValue.arrayUnion 来添加新元素，避免重复
         userRef.updateData([
             "posts": FieldValue.arrayUnion([recipeId])
         ]) { error in

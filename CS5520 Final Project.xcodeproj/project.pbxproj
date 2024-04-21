@@ -12,7 +12,6 @@
 		29474A382BAFDF2600364FCC /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A372BAFDF2600364FCC /* ProfileScreen.swift */; };
 		29474A3B2BAFDF5500364FCC /* AddRecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */; };
 		29474A3E2BAFDF7200364FCC /* RecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A3D2BAFDF7200364FCC /* RecipeScreen.swift */; };
-		29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */; };
 		29474A442BAFDFF800364FCC /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A432BAFDFF800364FCC /* MainScreen.swift */; };
 		29474A482BBD060A00364FCC /* ContentCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A472BBD060A00364FCC /* ContentCardCell.swift */; };
 		29474A4A2BBD1D7600364FCC /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29474A492BBD1D7600364FCC /* MainScreenViewController.swift */; };
@@ -78,7 +77,6 @@
 		29474A372BAFDF2600364FCC /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		29474A3A2BAFDF5500364FCC /* AddRecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeScreen.swift; sourceTree = "<group>"; };
 		29474A3D2BAFDF7200364FCC /* RecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScreen.swift; sourceTree = "<group>"; };
-		29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRecipeScreen.swift; sourceTree = "<group>"; };
 		29474A432BAFDFF800364FCC /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		29474A472BBD060A00364FCC /* ContentCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCardCell.swift; sourceTree = "<group>"; };
 		29474A492BBD1D7600364FCC /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -205,14 +203,6 @@
 			path = "Recipe Screen";
 			sourceTree = "<group>";
 		};
-		29474A3F2BAFDFA100364FCC /* Generate Recipe Screen */ = {
-			isa = PBXGroup;
-			children = (
-				29474A402BAFDFDD00364FCC /* GenerateRecipeScreen.swift */,
-			);
-			path = "Generate Recipe Screen";
-			sourceTree = "<group>";
-		};
 		29474A422BAFDFE800364FCC /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +240,6 @@
 			children = (
 				75DCF94B2BC97B1C001F93A8 /* Data Model */,
 				29474A422BAFDFE800364FCC /* Main Screen */,
-				29474A3F2BAFDFA100364FCC /* Generate Recipe Screen */,
 				29474A3C2BAFDF5900364FCC /* Recipe Screen */,
 				29474A392BAFDF2A00364FCC /* Add Recipe Screen */,
 				29474A362BAFDF0C00364FCC /* Profile Screen */,
@@ -460,7 +449,6 @@
 				29474A352BAFDF0100364FCC /* SignUpScreen.swift in Sources */,
 				29474A442BAFDFF800364FCC /* MainScreen.swift in Sources */,
 				29474A482BBD060A00364FCC /* ContentCardCell.swift in Sources */,
-				29474A412BAFDFDD00364FCC /* GenerateRecipeScreen.swift in Sources */,
 				29BE6F4C2BC7B146007B6672 /* LoginWithGoogleViewController.swift in Sources */,
 				29474A4A2BBD1D7600364FCC /* MainScreenViewController.swift in Sources */,
 				29BE6F5C2BD2F05A007B6672 /* likeButtonContoller.swift in Sources */,

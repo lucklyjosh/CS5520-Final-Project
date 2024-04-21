@@ -12,23 +12,6 @@ import FirebaseFirestore
 
 
 class ViewController: UIViewController {
-
-//    override func loadView() {
-//        view = SignUpScreen()
-//        view = LoginScreen()
-//        view = MainScreen()
-//          view = ProfileView()
-//            view = RecipeScreen()
-//            view = AddRecipeScreen()
-//        
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.title = "Foodie's Heaven"
-//    }
-
-
     var mainScreen: MainScreen!
     var recipes = [Recipe]()
     let childProgressView = ProgressSpinnerViewController()
@@ -108,34 +91,6 @@ class ViewController: UIViewController {
             }
         }
     }
-
-//    func fetchRecipes() {
-//        let db = Firestore.firestore()
-//        db.collection("recipes").order(by: "timestamp", descending: true).getDocuments { [weak self] (snapshot, error) in
-//            guard let self = self else { return }
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
-//                    let data = document.data()
-//                    let name = data["name"] as? String
-//                    let userName = data["userName"] as? String
-//                    let ingredients = data["ingredients"] as? String
-//                    let instructions = data["instructions"] as? String
-//                    let image = data["photoURL"] as? String
-//                    let userId = data["userId"] as? String
-//                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-//                    let recipeId = data["recipeId"] as? String
-//                    
-//                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId: recipeId ?? "")
-//                } ?? []
-//                self.mainScreen.collectionView.reloadData()
-//            }
-//        }
-//    }
-
-
-
     
     @objc func updateAuthenticationState() {
         print("Update called")
@@ -180,8 +135,6 @@ class ViewController: UIViewController {
     
     @objc func onButtonProfileTapped(){
         print("profile tapped in view controller----------------")
-//        self.showActivityIndicator()
-//        self.hideActivityIndicator()
         let profileScreen  = ProfileViewController()
         navigationController?.pushViewController(profileScreen, animated: true)
         

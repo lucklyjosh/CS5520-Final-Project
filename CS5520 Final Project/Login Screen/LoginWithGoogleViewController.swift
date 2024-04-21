@@ -20,15 +20,6 @@ extension LoginViewController{
         }
     }
     
-//    func navigateToMainScreen() {
-////        let mainScreenVC = MainScreenViewController()
-////        mainScreenVC.modalPresentationStyle = .fullScreen
-////        present(mainScreenVC, animated: true)
-//
-//        let mainScreenVC = MainScreenViewController()
-//        navigationController?.pushViewController(mainScreenVC, animated: true)
-//    }
-    
     @objc func handleGoogleSignIn() {
         print("Handling Google Sign-In")
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] signInResult, error in

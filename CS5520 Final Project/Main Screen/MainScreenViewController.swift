@@ -25,7 +25,6 @@ class MainScreenViewController: UIViewController {
     }
     
     @objc func onButtonProfileTapped(){
-        print("profile tapped")
         
         let profileScreen  = ProfileViewController()
         
@@ -33,7 +32,6 @@ class MainScreenViewController: UIViewController {
         
     }
     @objc func onButtonPlusTapped(){
-        print("plus tapped+++++++++++++++++")
         
         let profileScreen  = ProfileViewController()
         navigationController?.pushViewController(profileScreen, animated: true)

@@ -34,8 +34,6 @@ class ProfileViewController: UIViewController{
     //MARK: variable to store the picked Image...
     var pickedImage:UIImage?
     
-//    var profileImageView: UIImageView!
-    
     
     override func loadView() {
         view = profileScreen
@@ -83,7 +81,6 @@ class ProfileViewController: UIViewController{
                                         
                                         DispatchQueue.main.async {
                                         self.profileScreen.profileImageView.image = image
-//                                        self.fetchRecipes()
                                         self.fetchUserRecipes()
                                         }
                                     } else {
@@ -380,35 +377,6 @@ class ProfileViewController: UIViewController{
             }
         }
     }
-
-//    func fetchRecipes() {
-//        print("fetching in profile")
-//        let db = Firestore.firestore()
-//        db.collection("recipes").order(by: "timestamp", descending: true).addSnapshotListener { [weak self] (snapshot, error) in
-//            guard let self = self else { return }
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                self.recipes = snapshot?.documents.compactMap { document -> Recipe? in
-//                    let data = document.data()
-//                    let name = data["name"] as? String
-//                    let userName = data["userName"] as? String
-//                    let ingredients = data["ingredients"] as? String
-//                    let instructions = data["instructions"] as? String
-//                    let image = data["photoURL"] as? String
-//                    let userId = data["userId"] as? String
-//                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
-//                    let recipeId = data["recipeId"] as? String
-//                    return Recipe(name: name ?? "", userName: userName ?? "", ingredients: ingredients ?? "", instructions: instructions ?? "", image: image ?? "", userId: userId ?? "", timestamp: timestamp, recipeId:recipeId ?? "")
-//                } ?? []
-//                print("_____-after fetching")
-//                print(self.recipes)
-//                self.profileScreen.collectionView.reloadData()
-//            }
-//        }
-//    }
-
-    //codes omitted...
 }
 
 // MARK: - UICollectionViewDataSource

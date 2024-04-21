@@ -6,7 +6,7 @@ class RecipeScreen: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "default_recipe_image") // 设置默认图片
+        imageView.image = UIImage(named: "default_recipe_image") 
         return imageView
     }()
     

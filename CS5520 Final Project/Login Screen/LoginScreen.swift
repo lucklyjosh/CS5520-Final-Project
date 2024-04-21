@@ -83,6 +83,7 @@ class LoginScreen: UIView {
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.cornerRadius = 10
+        textField.autocapitalizationType = .none
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         textField.leftViewMode = .always
         let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 24, height: 24))

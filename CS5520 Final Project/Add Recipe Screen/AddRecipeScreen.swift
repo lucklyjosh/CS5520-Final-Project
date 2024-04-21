@@ -25,21 +25,10 @@ class AddRecipeScreen: UIView {
         return button
     }()
     
-//    func setupbuttonTakePhoto(){
-//        picture = UIButton(type: .system)
-//        picture.setTitle("", for: .normal)
-//        picture.setImage(UIImage(systemName: "camera.fill"), for: .normal)
-//        picture.contentHorizontalAlignment = .fill
-//        picture.contentVerticalAlignment = .fill
-//        picture.imageView?.contentMode = .scaleAspectFit
-//        picture.showsMenuAsPrimaryAction = true
-//        picture.translatesAutoresizingMaskIntoConstraints = false
-//        self.addSubview(picture)
-//    }
-    
     let recipeNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter recipe name"
+        textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         return textField
     }()
@@ -48,6 +37,7 @@ class AddRecipeScreen: UIView {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .gray
+        textField.autocapitalizationType = .none
         textField.placeholder = "List ingredients"
         return textField
     }()
@@ -56,21 +46,10 @@ class AddRecipeScreen: UIView {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .gray
+        textField.autocapitalizationType = .none 
         textField.placeholder = "Add cooking steps"
         return textField
     }()
-
-    
-//    let addButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Add →", for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-//        button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = UIColor(red: 255/255, green: 0, blue: 127/255, alpha: 1)
-//        button.layer.cornerRadius = 20
-//        return button
-//    }()
-    
     
     
     override init(frame: CGRect) {
@@ -84,26 +63,18 @@ class AddRecipeScreen: UIView {
     
     private func setupUI() {
         backgroundColor = .white
-//        setupbuttonTakePhoto()
         
         addSubview(picture)
         addSubview(recipeNameTextField)
         addSubview(ingredientsTextField)
         addSubview(instructionsTextField)
-//        addSubview(addButton)
         
         picture.translatesAutoresizingMaskIntoConstraints = false
         recipeNameTextField.translatesAutoresizingMaskIntoConstraints = false
         ingredientsTextField.translatesAutoresizingMaskIntoConstraints = false
         instructionsTextField.translatesAutoresizingMaskIntoConstraints = false
-//        addButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            picture.topAnchor.constraint(equalTo: topAnchor),
-//            picture.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            picture.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            picture.heightAnchor.constraint(equalToConstant: 150),
-//
             picture.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
             picture.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             picture.widthAnchor.constraint(equalToConstant: 100),
@@ -123,12 +94,7 @@ class AddRecipeScreen: UIView {
             instructionsTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             instructionsTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             instructionsTextField.heightAnchor.constraint(equalToConstant: 100),
-            
-//            addButton.topAnchor.constraint(equalTo:instructionsTextField.bottomAnchor, constant: 16),
-//            addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-//            addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//            addButton.heightAnchor.constraint(equalToConstant: 50),
-//            addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+
         ])
     }
 }
