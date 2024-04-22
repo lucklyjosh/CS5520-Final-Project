@@ -128,6 +128,7 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 // Profile update successful
                 self.hideActivityIndicator()
+                NotificationCenter.default.post(name: Notification.Name("RecipeUpdated"), object: nil)
                 self.navigationController?.popViewController(animated: true)
             } else {
                 // Error updating profile
